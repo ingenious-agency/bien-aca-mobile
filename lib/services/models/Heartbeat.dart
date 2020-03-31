@@ -8,7 +8,7 @@ Future<Heartbeat> sendHeartbeat(lat, long) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   int userId = prefs.getInt("userId");
   // Local
-  String baseUrl = 'http://localhost:3000';
+  String baseUrl = 'http://10.0.2.2:3000';
 
   final response = await http.post(
       '$baseUrl/users/$userId/heartbeats',

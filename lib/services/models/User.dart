@@ -6,12 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 enum BinaryGender { MALE, FEMALE }
 
-Future<bool> registerUser(lat, long) async {
+Future<bool> registerUser(lat, lng) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   // Local
   String registerUserJson =
-      '{ "user": { "email": "emailTest@testing.com", "name": "Test User", "password": "testtest",  "password_confirmation": "testtest", "identity_number": "3.482.204-2", "date_of_birth": "1984-03-20", "binary_gender": 0, "cellphone": "099275434", "lat": "$lat", "long": "$long" } }';
-  String baseUrl = 'http://localhost:3000';
+      '{ "user": { "email": "emailTest@testing.com", "name": "Test User", "password": "testtest",  "password_confirmation": "testtest", "identity_number": "3.482.204-2", "date_of_birth": "1984-03-20", "gender": 1, "cellphone": "099275434", "lat": "$lat", "lng": "$lng" } }';
+  String baseUrl = 'http://10.0.2.2:3000';
 
   final response = await http.post(
       '$baseUrl/users',
