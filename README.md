@@ -7,11 +7,9 @@ A geolocator and geotracking project.
 ```bash
 cd bien-aca-mobile
 # Initial installation
-make install
+flutter pub get
 # To run application
-make run
-# To run all commands at once
-make all
+flutter run
 ```
 
 ## Build appbundle (testing for Android)
