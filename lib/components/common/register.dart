@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:quarantine_control/services/models/User.dart';
+import 'package:bien_aca_quarantine/services/models/User.dart';
 
 import 'package:geolocator/geolocator.dart';
 

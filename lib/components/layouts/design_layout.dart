@@ -1,0 +1,2 @@
+/// Este archivo va a ser la layout que aplique el design de todas las screens (imagotipo arriba a la derecha y footer con logotipo)
+/// BEAR IN MIND: UTILIZAR SOLO UNA VEZ, en el root de la application

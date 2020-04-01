@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:quarantine_control/services/models/Heartbeat.dart';
+import 'package:bien_aca_quarantine/services/models/Heartbeat.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:local_auth/local_auth.dart';
