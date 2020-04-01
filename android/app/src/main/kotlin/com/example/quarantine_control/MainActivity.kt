@@ -1,4 +1,4 @@
-package com.example.quarantine_control
+package com.example.bien_aca_quarantine
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

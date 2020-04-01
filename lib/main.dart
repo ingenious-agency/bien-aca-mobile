@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:quarantine_control/components/pages/home_page.dart';
-import 'package:quarantine_control/components/pages/main_page.dart';
+import 'package:bien_aca_quarantine/constants/MyConstants.dart';
+import 'package:bien_aca_quarantine/components/pages/main_page.dart';
+import 'package:bien_aca_quarantine/components/pages/home_page.dart';
+// import 'package:bien_aca_quarantine/components/pages/alert_page.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MyConstants(
+      child: MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,9 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/mainpage': (context) => MainPage()
+        '/mainpage': (context) => MainPage(),
+        // '/alertpage': (context) => AlertPage(),
       },
-      title: 'Quarantine Control Demo',
+      title: MyConstants.of(context).mainTitle,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
