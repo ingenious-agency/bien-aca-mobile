@@ -11,7 +11,7 @@ Future<bool> registerUser(lat, lng) async {
   // Local
   String registerUserJson =
       '{ "user": { "email": "emailTest@testing.com", "name": "Test User", "password": "testtest",  "password_confirmation": "testtest", "identity_number": "3.482.204-2", "date_of_birth": "1984-03-20", "gender": 1, "cellphone": "099275434", "lat": "$lat", "lng": "$lng" } }';
-  String baseUrl = 'http://10.0.2.2:3000';
+  String baseUrl = 'https://bian-aca-prod.herokuapp.com/';
 
   final response = await http.post(
       '$baseUrl/users',
