@@ -13,22 +13,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // _showRegister == true
-                /* ? */ Register()
-                // : RaisedButton(
-                //     child: Text("Registrate para empezar"),
-                //     onPressed: () {
-                //       setState(() {
-                //         _showRegister = true;
-                //       });
-                //     },
-                //   ),
-          ],
-        ),
+      body: Container(
+        child: Center(
+            child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // _showRegister == true
+              /* ? */ Register()
+              // : RaisedButton(
+              //     child: Text("Registrate para empezar"),
+              //     onPressed: () {
+              //       setState(() {
+              //         _showRegister = true;
+              //       });
+              //     },
+              //   ),
+            ],
+          ),
+        )),
       ),
     );
   }

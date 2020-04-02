@@ -43,10 +43,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Página principal"),
-      ),
-      body: Center(
+        body: Container(
+      child: Center(
+          child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -63,8 +62,8 @@ class _MainPageState extends State<MainPage> {
             ]
           ],
         ),
-      ),
-    );
+      )),
+    ));
   }
 
   Future<void> _authenticateFingerprint() async {
@@ -88,8 +87,8 @@ class _MainPageState extends State<MainPage> {
           Geolocator().getPositionStream(locationOptions);
       _positionStreamSubscription =
           positionStream.listen((Position position) async {
-        Heartbeat currentHeartbeat = await sendHeartbeat(position.latitude,
-            position.longitude);
+        Heartbeat currentHeartbeat =
+            await sendHeartbeat(position.latitude, position.longitude);
         if (isFirstInAWhilePositionTrack) {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString("lastLat", currentHeartbeat.lat);
