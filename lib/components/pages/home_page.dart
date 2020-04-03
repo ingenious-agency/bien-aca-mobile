@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/components/common/register.dart';
+import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,27 +13,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+//    return TemplateLayout(toRender: 'register');
     return Scaffold(
-      body: Container(
-        child: Center(
-            child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // _showRegister == true
-              /* ? */ Register()
-              // : RaisedButton(
-              //     child: Text("Registrate para empezar"),
-              //     onPressed: () {
-              //       setState(() {
-              //         _showRegister = true;
-              //       });
-              //     },
-              //   ),
-            ],
-          ),
-        )),
-      ),
+      body: Center(
+          child: Register()),
     );
   }
 }

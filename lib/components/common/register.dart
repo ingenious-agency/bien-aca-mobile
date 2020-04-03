@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/services/models/User.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:geolocator/geolocator.dart';
+
+import 'package:bien_aca_quarantine/constants/MyConstants.dart';
+
+import 'app_scaffold.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -12,71 +17,68 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   Position _currentPosition;
 
-  List<String> _textFieldsPlaceholders = [
-    'Correo electrónico',
-    'Nombre',
-    'Contraseña',
-    'Confirmación de contraseña',
-    'Número de documento',
-    'Fecha de nacimiento',
-    'Género',
-    'Número de teléfono',
-  ];
-
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
+//    _getCurrentLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20.0),
-      child: Center(
+    return AppScaffold(AppBody: RegisterForm(), backgroundColorPage: MyConstants.of(context).orange);
+  }
+}
+
+//_getCurrentLocation() {
+//  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+//
+//  geolocator
+//      .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+//      .then((Position position) {
+//    setState(() {
+//      _currentPosition = position;
+//    });
+//  }).catchError((e) {
+//    print(e);
+//  });
+//}
+
+class RegisterForm extends StatefulWidget {
+  @override
+  _RegisterFormState createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: 500.0),
+      child: Form(
+        key: _formKey,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ...renderForm(),
-            RaisedButton(
-              child: Text("Registrar"),
-              onPressed: () async {
-                bool successfulRegister = await registerUser(_currentPosition.latitude, _currentPosition.longitude);
-                if (successfulRegister)
-                  Navigator.pushReplacementNamed(context, '/mainpage');
+          children: <Widget>[
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Necesitamos tu nombre completo';
+                }
+                return null;
               },
             ),
+            FlatButton(
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text('procesando data')));
+                }
+              },
+              child: Text('enviar'),
+            )
           ],
         ),
       ),
     );
-  }
-
-  _getCurrentLocation() {
-    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-
-    geolocator
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-        .then((Position position) {
-      setState(() {
-        _currentPosition = position;
-      });
-    }).catchError((e) {
-      print(e);
-    });
-  }
-
-  List<Widget> renderForm() {
-    List<Widget> form = _textFieldsPlaceholders.map((placeholder) {
-      return TextField(
-        keyboardType: TextInputType.number,
-        onChanged: (String text) {},
-        onSubmitted: (String text) {},
-        decoration:
-            InputDecoration(border: InputBorder.none, hintText: placeholder),
-      );
-    }).toList();
-
-    return form;
   }
 }

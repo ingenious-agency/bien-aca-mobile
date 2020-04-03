@@ -19,9 +19,6 @@ class MyApp extends StatelessWidget {
         // '/alertpage': (context) => AlertPage(),
       },
       title: MyConstants.of(context).mainTitle,
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
       home: HomePage(),
     );
   }
