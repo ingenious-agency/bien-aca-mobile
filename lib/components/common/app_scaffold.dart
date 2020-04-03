@@ -12,24 +12,27 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: backgroundColorPage,
-        body: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.topRight,
-              child: Image.asset(
-                'assets/images/quarent-logo.png',
-                width: 100.0,
+        body: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Stack(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topRight,
+                child: Image.asset(
+                  'assets/images/quarent-logo-blanco.png',
+                  width: 100.0,
+                ),
               ),
-            ),
-            AppBody,
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Image.asset(
-                'assets/images/bienaca-logo.png',
-                width: 100.0,
+              Center(child: AppBody),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Image.asset(
+                  'assets/images/bienaca-logo.png',
+                  width: 100.0,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         )
     );
   }

@@ -20,6 +20,13 @@ class MyApp extends StatelessWidget {
       },
       title: MyConstants.of(context).mainTitle,
       home: HomePage(),
+      theme: ThemeData(
+        fontFamily: 'OpenSans',
+        textTheme: TextTheme(
+          headline: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold, fontFamily: 'RobotoSlab', color: MyConstants.of(context).blue),
+          body1: TextStyle(fontSize: 16.0, color: MyConstants.of(context).blue),
+        )
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:bien_aca_quarantine/components/common/register_form.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/services/models/User.dart';
@@ -43,42 +44,3 @@ class _RegisterState extends State<Register> {
 //  });
 //}
 
-class RegisterForm extends StatefulWidget {
-  @override
-  _RegisterFormState createState() => _RegisterFormState();
-}
-
-class _RegisterFormState extends State<RegisterForm> {
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 500.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Necesitamos tu nombre completo';
-                }
-                return null;
-              },
-            ),
-            FlatButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('procesando data')));
-                }
-              },
-              child: Text('enviar'),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
