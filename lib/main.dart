@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bien_aca_quarantine/constants/MyConstants.dart';
+import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:bien_aca_quarantine/components/pages/main_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
 // import 'package:bien_aca_quarantine/components/pages/alert_page.dart';
@@ -44,7 +44,7 @@ void callbackDispatcher() {
         //     .then((Position position) async {
         //   print(position.latitude);
         //   print(position.longitude);biar y hacer que el geofencing lo haga el front.
-Sacando el tiempo de implementación, que ya vemos que es muy difícil llegar para el viernes con todo, que te parece que pueda funcionar mejor de esas dos opciones.
+        // Sacando el tiempo de implementación, que ya vemos que es muy difícil llegar para el viernes con todo, que te parece que pueda funcionar mejor de esas dos opciones.
         //   /// 2. Send heartbeat
         //   Heartbeat hb = await sendHeartbeat(position.latitude, position.longitude);
         //   print(hb.id);
@@ -64,18 +64,18 @@ Sacando el tiempo de implementación, que ya vemos que es muy difícil llegar pa
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Workmanager.initialize(callbackDispatcher);
-  Workmanager.registerPeriodicTask(
-    "1",
-    "geofencingInBackground", //This is the value that will be returned in the callbackDispatcher
-    initialDelay: Duration(minutes: 1),
-    frequency: Duration(minutes: 15),
-    constraints: Constraints(
-      networkType: NetworkType.connected,
-    ),
-  );
+  // Workmanager.initialize(callbackDispatcher);
+  // Workmanager.registerPeriodicTask(
+  //   "1",
+  //   "geofencingInBackground", //This is the value that will be returned in the callbackDispatcher
+  //   initialDelay: Duration(minutes: 1),
+  //   frequency: Duration(minutes: 15),
+  //   constraints: Constraints(
+  //     networkType: NetworkType.connected,
+  //   ),
+  // );
 
-  runApp(MyConstants(
+  runApp(BienAcaConstants(
     child: MyApp(),
   ));
 }
@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
         '/mainpage': (context) => MainPage(),
         // '/alertpage': (context) => AlertPage(),
       },
-      title: MyConstants.of(context).mainTitle,
+      title: BienAcaConstants.of(context).mainTitle,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),

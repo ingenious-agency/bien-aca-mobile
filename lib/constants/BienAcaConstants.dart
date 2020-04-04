@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class MyConstants extends InheritedWidget {
-  static MyConstants of(BuildContext context) => context. dependOnInheritedWidgetOfExactType<MyConstants>();
+class BienAcaConstants extends InheritedWidget {
+  static BienAcaConstants of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<BienAcaConstants>();
 
-  const MyConstants({Widget child, Key key}): super(key: key, child: child);
+  const BienAcaConstants({Widget child, Key key})
+      : super(key: key, child: child);
 
   /// Texts
   /// To define a text constant do it following:
-  /// final String screennameCapitalisedVarName = "value" 
+  /// final String screennameCapitalisedVarName = "value"
   final String mainTitle = 'BienAcá - Quarent';
   final String homepageTitle = 'This is a String type constant';
 
@@ -29,5 +31,5 @@ class MyConstants extends InheritedWidget {
   /// - Necesitamos un callback para el evento de sendPush por el Backend
 
   @override
-  bool updateShouldNotify(MyConstants oldWidget) => false;
+  bool updateShouldNotify(BienAcaConstants oldWidget) => false;
 }
