@@ -14,6 +14,13 @@ class _RegisterFormState extends State<RegisterForm> {
   final nameController = TextEditingController();
 
   @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 500.0),
@@ -28,6 +35,7 @@ class _RegisterFormState extends State<RegisterForm> {
             Text('Con tu registro, podremos ayudar a contener el virus y en ningún momento compartimos tus datos personales!.', style: Theme.of(context).textTheme.body1),
             SizedBox(height: 10.0),
             TextFormField(
+              controller: nameController,
               validator: (value) {
                 return value.isEmpty ? 'Este dato es requerido' : null;
               },
@@ -38,7 +46,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: MyConstants.of(context).blue
+                    color: MyConstants.of(context).blue,
                   )
                 ),
               ),
@@ -47,7 +55,7 @@ class _RegisterFormState extends State<RegisterForm> {
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('procesando data')));
+                      .showSnackBar(SnackBar(content: Text('${nameController.text}')));
                 }
               },
               child: Text('enviar'),
