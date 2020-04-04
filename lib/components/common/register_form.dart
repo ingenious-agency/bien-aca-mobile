@@ -10,8 +10,33 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
 
+
   final _formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
+  static final nameController = TextEditingController();
+  static final emailController = TextEditingController();
+  static final passwordController = TextEditingController();
+  static final passConfirmController = TextEditingController();
+  static final identityNumberController = TextEditingController();
+  static final dateOfBirthController = TextEditingController();
+  static final binaryGenderController = TextEditingController();
+  static final cellphoneController = TextEditingController();
+
+  List providedFields = [
+    {'name': 'Nombre completo', 'controller': nameController},
+    {'email': 'Email', 'controller': emailController}
+    { 'password': 'Contraseña', 'controller': passwordController}
+    {
+      'passwordConfirmation': 'Confirmá tu contraseñá',
+      'controller': passConfirmController
+    }
+    {
+      'identityNumbre': 'Número de identidad',
+      'controller': identityNumberController
+    }
+    { 'dateOfBirth': 'Fecha de nacimiento', 'controller': dateOfBirthController}
+    { 'binaryGender': 'Género', 'controller': binaryGenderController}
+    { 'cellphone': 'Teléfono', 'controller': cellphoneController}
+  ];
 
   @override
   void dispose() {
@@ -31,9 +56,18 @@ class _RegisterFormState extends State<RegisterForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('Registrate!',
-              style: Theme.of(context).textTheme.headline),
-            Text('Con tu registro, podremos ayudar a contener el virus y en ningún momento compartimos tus datos personales!.', style: Theme.of(context).textTheme.body1),
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline),
+            Text(
+                'Con tu registro, podremos ayudar a contener el virus y en ningún momento compartimos tus datos personales!.',
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .body1),
             SizedBox(height: 10.0),
+
             TextFormField(
               controller: nameController,
               validator: (value) {
@@ -42,27 +76,37 @@ class _RegisterFormState extends State<RegisterForm> {
               decoration: InputDecoration(
                 labelText: 'Nombre completo *',
                 labelStyle: TextStyle(
-                  color: MyConstants.of(context).blue,
+                  color: MyConstants
+                      .of(context)
+                      .blue,
                 ),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: MyConstants.of(context).blue,
-                  )
+                    borderSide: BorderSide(
+                      color: MyConstants
+                          .of(context)
+                          .blue,
+                    )
                 ),
               ),
             ),
-            FlatButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('${nameController.text}')));
-                }
-              },
-              child: Text('enviar'),
-            )
+            Align(
+              alignment: FractionalOffset.bottomRight,
+              child: FlatButton(
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    Scaffold.of(context)
+                        .showSnackBar(
+                        SnackBar(content: Text('${nameController.text}')));
+                  }
+                },
+                child: Text('enviar'),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
+  class
 }
