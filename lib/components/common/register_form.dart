@@ -9,7 +9,9 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+
   final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +25,23 @@ class _RegisterFormState extends State<RegisterForm> {
           children: <Widget>[
             Text('Registrate!',
               style: Theme.of(context).textTheme.headline),
-            Text('Vas a poder establecer tu zona de cuarentena, geolocalizarte y geolocalizar tu celular!', style: Theme.of(context).textTheme.body1),
-            Text('Todo esto, sin compartir a nadie tus datos personales!', style: Theme.of(context).textTheme.body1),
+            Text('Con tu registro, podremos ayudar a contener el virus y en ningún momento compartimos tus datos personales!.', style: Theme.of(context).textTheme.body1),
+            SizedBox(height: 10.0),
             TextFormField(
               validator: (value) {
-                if (value.isEmpty) {
-                  return 'Necesitamos tu nombre completo';
-                }
-                return null;
+                return value.isEmpty ? 'Este dato es requerido' : null;
               },
+              decoration: InputDecoration(
+                labelText: 'Nombre completo *',
+                labelStyle: TextStyle(
+                  color: MyConstants.of(context).blue,
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: MyConstants.of(context).blue
+                  )
+                ),
+              ),
             ),
             FlatButton(
               onPressed: () {

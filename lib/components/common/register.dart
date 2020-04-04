@@ -1,4 +1,3 @@
-import 'package:bien_aca_quarantine/components/common/register_form.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/services/models/User.dart';
@@ -9,6 +8,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:bien_aca_quarantine/constants/MyConstants.dart';
 
 import 'app_scaffold.dart';
+import 'package:bien_aca_quarantine/components/common/register_form.dart';
+
 
 class Register extends StatefulWidget {
   @override
