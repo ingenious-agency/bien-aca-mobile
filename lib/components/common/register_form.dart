@@ -12,6 +12,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
 
   final _formKey = GlobalKey<FormState>();
+
   static final nameController = TextEditingController();
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
@@ -20,23 +21,6 @@ class _RegisterFormState extends State<RegisterForm> {
   static final dateOfBirthController = TextEditingController();
   static final binaryGenderController = TextEditingController();
   static final cellphoneController = TextEditingController();
-
-  List providedFields = [
-    {'name': 'Nombre completo', 'controller': nameController},
-    {'email': 'Email', 'controller': emailController}
-    { 'password': 'Contraseña', 'controller': passwordController}
-    {
-      'passwordConfirmation': 'Confirmá tu contraseñá',
-      'controller': passConfirmController
-    }
-    {
-      'identityNumbre': 'Número de identidad',
-      'controller': identityNumberController
-    }
-    { 'dateOfBirth': 'Fecha de nacimiento', 'controller': dateOfBirthController}
-    { 'binaryGender': 'Género', 'controller': binaryGenderController}
-    { 'cellphone': 'Teléfono', 'controller': cellphoneController}
-  ];
 
   @override
   void dispose() {
@@ -47,66 +31,85 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 500.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('Registrate!',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline),
-            Text(
-                'Con tu registro, podremos ayudar a contener el virus y en ningún momento compartimos tus datos personales!.',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .body1),
-            SizedBox(height: 10.0),
-
-            TextFormField(
-              controller: nameController,
-              validator: (value) {
-                return value.isEmpty ? 'Este dato es requerido' : null;
-              },
-              decoration: InputDecoration(
-                labelText: 'Nombre completo *',
-                labelStyle: TextStyle(
-                  color: MyConstants
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 20.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Registrate!',
+                  style: Theme
                       .of(context)
-                      .blue,
-                ),
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: MyConstants
-                          .of(context)
-                          .blue,
-                    )
+                      .textTheme
+                      .headline),
+              Text(
+                  'Con tu registro, podremos ayudar a contener el virus y en ningún momento compartimos tus datos personales!.',
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .body1),
+              SizedBox(height: 10.0),
+              ListView(children: <Widget>[
+                  _textFormFieldCreator('Nombre completo *', nameController),
+                  _textFormFieldCreator('Email *', emailController),
+                  _textFormFieldCreator('Contraseña *', passwordController),
+                  _textFormFieldCreator('Confirmación contraseña *', passConfirmController),
+                  _textFormFieldCreator('Número de identidad *', identityNumberController),
+                  _textFormFieldCreator('Fecha Nacimiento *', dateOfBirthController),
+                  _textFormFieldCreator('Género *', binaryGenderController),
+                  _textFormFieldCreator('Celular *', cellphoneController),
+                ],
+                shrinkWrap: true,
+              ),
+              Align(
+                alignment: FractionalOffset.bottomRight,
+                child: FlatButton(
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      Scaffold.of(context)
+                          .showSnackBar(
+                          SnackBar(content: Text('${nameController.text}')));
+                    }
+                  },
+                  child: Text('enviar'),
                 ),
               ),
-            ),
-            Align(
-              alignment: FractionalOffset.bottomRight,
-              child: FlatButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    Scaffold.of(context)
-                        .showSnackBar(
-                        SnackBar(content: Text('${nameController.text}')));
-                  }
-                },
-                child: Text('enviar'),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  class
+  _textFormFieldCreator(providedFieldName, providedFieldController) {
+    return Container(
+      height: 60.0,
+      child: TextFormField(
+        controller: providedFieldController,
+        validator: (value) {
+          return value.isEmpty ? 'Este dato es requerido' : null;
+        },
+        decoration: InputDecoration(
+          labelText: providedFieldName,
+          labelStyle: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.bold,
+            color: MyConstants
+                .of(context)
+                .blue,
+          ),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: MyConstants
+                    .of(context)
+                    .blue,
+              )
+          ),
+        ),
+      ),
+    );
+  }
 }
