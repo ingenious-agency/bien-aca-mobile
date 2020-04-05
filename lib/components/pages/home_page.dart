@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/components/common/register.dart';
-import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 class HomePage extends StatefulWidget {
   @override

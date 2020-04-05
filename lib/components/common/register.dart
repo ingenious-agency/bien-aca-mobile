@@ -7,7 +7,7 @@ import 'package:geolocator/geolocator.dart';
 
 import 'package:bien_aca_quarantine/constants/MyConstants.dart';
 
-import 'app_scaffold.dart';
+import 'package:bien_aca_quarantine/components/common/app_scaffold.dart';
 import 'package:bien_aca_quarantine/components/common/register_form.dart';
 
 

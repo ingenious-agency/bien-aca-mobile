@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:bien_aca_quarantine/constants/MyConstants.dart';
 import 'package:bien_aca_quarantine/components/pages/main_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
-// import 'package:bien_aca_quarantine/components/pages/alert_page.dart';
+import 'package:bien_aca_quarantine/components/pages/success_page.dart';
 
 void main() => runApp(MyConstants(
       child: MyApp(),
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/mainpage': (context) => MainPage(),
+        '/success': (context) => SuccessPage(),
         // '/alertpage': (context) => AlertPage(),
       },
       title: MyConstants.of(context).mainTitle,

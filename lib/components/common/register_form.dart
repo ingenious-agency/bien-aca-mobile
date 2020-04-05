@@ -53,25 +53,26 @@ class _RegisterFormState extends State<RegisterForm> {
                       .body1),
               SizedBox(height: 10.0),
               Column(children: <Widget>[
-                  _textFormFieldCreator('Nombre completo *', nameController),
-                  _textFormFieldCreator('Email *', emailController),
-                  _textFormFieldCreator('Contraseña *', passwordController),
-                  _textFormFieldCreator('Confirmación contraseña *', passConfirmController),
-                  _textFormFieldCreator('Número de identidad *', identityNumberController),
-                  _textFormFieldCreator('Fecha Nacimiento *', dateOfBirthController),
-                  _textFormFieldCreator('Género *', binaryGenderController),
-                  _textFormFieldCreator('Celular *', cellphoneController),
-                ]),
+                _textFormFieldCreator('Nombre completo *', nameController),
+                _textFormFieldCreator('Email *', emailController),
+                _textFormFieldCreator('Contraseña *', passwordController),
+                _textFormFieldCreator(
+                    'Confirmación contraseña *', passConfirmController),
+                _textFormFieldCreator(
+                    'Número de identidad *', identityNumberController),
+                _textFormFieldCreator(
+                    'Fecha Nacimiento *', dateOfBirthController),
+                _textFormFieldCreator('Género *', binaryGenderController),
+                _textFormFieldCreator('Celular *', cellphoneController),
+              ]),
               SizedBox(height: 20.0),
               Align(
                 alignment: FractionalOffset.bottomRight,
                 child: FlatButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      Scaffold.of(context)
-                          .showSnackBar(
-                          SnackBar(content: Text('${nameController.text}')));
-                    }
+//                    if (_formKey.currentState.validate()) {
+                    return Navigator.pushNamed(context, '/success');
+//                    }
                   },
                   child: Text('enviar'),
                 ),
