@@ -33,7 +33,7 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 20.0),
+        padding: EdgeInsets.fromLTRB(20.0, 140.0, 20.0, 40.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -52,7 +52,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       .textTheme
                       .body1),
               SizedBox(height: 10.0),
-              ListView(children: <Widget>[
+              Column(children: <Widget>[
                   _textFormFieldCreator('Nombre completo *', nameController),
                   _textFormFieldCreator('Email *', emailController),
                   _textFormFieldCreator('Contraseña *', passwordController),
@@ -61,9 +61,8 @@ class _RegisterFormState extends State<RegisterForm> {
                   _textFormFieldCreator('Fecha Nacimiento *', dateOfBirthController),
                   _textFormFieldCreator('Género *', binaryGenderController),
                   _textFormFieldCreator('Celular *', cellphoneController),
-                ],
-                shrinkWrap: true,
-              ),
+                ]),
+              SizedBox(height: 20.0),
               Align(
                 alignment: FractionalOffset.bottomRight,
                 child: FlatButton(
