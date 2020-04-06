@@ -71,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 child: FlatButton(
                   onPressed: () {
 //                    if (_formKey.currentState.validate()) {
-                    return Navigator.pushNamed(context, '/success');
+                    return Navigator.pushNamed(context, '/successpage');
 //                    }
                   },
                   child: Text('enviar'),
