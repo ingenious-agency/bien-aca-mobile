@@ -5,6 +5,8 @@ import 'package:bien_aca_quarantine/components/common/app_scaffold.dart';
 import 'package:flutter/rendering.dart';
 
 class SuccessPage extends StatelessWidget {
+
+//  TODO: make this component available to receive parameters in order to make the widget truly common
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -58,6 +60,7 @@ class SuccessPage extends StatelessWidget {
   }
 }
 
+// TODO: check if is correct the class here or is best to put somewhere else
 class AlertPageArguments {
   final String headlineText;
   final String bodyText;

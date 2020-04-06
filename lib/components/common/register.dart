@@ -27,6 +27,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+//    TODO: pass parameters to the route
     return AppScaffold(AppBody: RegisterForm(), backgroundColorPage: MyConstants.of(context).orange);
   }
 }

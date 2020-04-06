@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:bien_aca_quarantine/components/common/app_scaffold.dart';
+import 'package:bien_aca_quarantine/constants/MyConstants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -42,29 +45,57 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      child: Center(
-          child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              child: Text("Enviar prueba biométrica"),
-              onPressed: () {
-                _authenticateFingerprint();
-              },
-            ),
-            if (_positions.length > 0) ...[
-              Text("${_positions[_positions.length - 1].latitude}"),
-              Text("${_positions[_positions.length - 1].longitude}"),
-              Text("$distanceDyna"),
-            ]
-          ],
+    return AppScaffold(
+        AppBody: SingleChildScrollView(
+          child: Padding(
+              padding: EdgeInsets.fromLTRB(20.0, 140.0, 20.0, 40.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Tu ubicación actual!',
+                      style: Theme.of(context).textTheme.headline),
+                  Text('Latitud: -31.43234 | Longitud: -62.34323',
+                      style: Theme.of(context).textTheme.body1),
+                  SizedBox(height: 10.0),
+                  Text(
+                      'En caso de salir de tu zona o no cumplir con las pruebas biométicas, un preaviso te notificará.',
+                      style: Theme.of(context).textTheme.body1),
+                  SizedBox(height: 10.0),
+                  Text(
+                      'Si en el lapso de 10 minutos no corregís la situación, una alerta será enviada al centro de control y esta aplicación quedará bloqueada.',
+                      style: Theme.of(context).textTheme.body1),
+                ],
+              )),
         ),
-      )),
-    ));
+        backgroundColorPage: MyConstants.of(context).lightBlue);
   }
+
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//        body: Container(
+//      child: Center(
+//          child: SingleChildScrollView(
+//        child: Column(
+//          mainAxisAlignment: MainAxisAlignment.center,
+//          children: <Widget>[
+//            RaisedButton(
+//              child: Text("Enviar prueba biométrica"),
+//              onPressed: () {
+//                _authenticateFingerprint();
+//              },
+//            ),
+//            if (_positions.length > 0) ...[
+//              Text("${_positions[_positions.length - 1].latitude}"),
+//              Text("${_positions[_positions.length - 1].longitude}"),
+//              Text("$distanceDyna"),
+//            ]
+//          ],
+//        ),
+//      )),
+//    ));
+//  }
 
   Future<void> _authenticateFingerprint() async {
     bool authenticated = false;

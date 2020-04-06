@@ -3,18 +3,10 @@ import 'package:bien_aca_quarantine/constants/MyConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:bien_aca_quarantine/components/common/app_scaffold.dart';
 import 'package:flutter/rendering.dart';
-import 'package:bien_aca_quarantine/components/pages/success_page.dart';
 
 class AlertPage extends StatelessWidget {
 
   static const routeName = '/extractArguments';
-
-//
-//  final String headlineText;
-//  final String bodyText;
-//  final bool doBiometricTest;
-//
-//  AlertPage({this.headlineText, this.bodyText, this.doBiometricTest});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +14,7 @@ class AlertPage extends StatelessWidget {
         .of(context)
         .settings
         .arguments;
-    double c_width = MediaQuery
+    double cWidth = MediaQuery
         .of(context)
         .size
         .width * 0.7;
@@ -51,7 +43,7 @@ class AlertPage extends StatelessWidget {
                               fontFamily: 'RobotoSlab',
                               color: Colors.white)),
                       Container(
-                        width: c_width,
+                        width: cWidth,
                         child: Text(args.bodyText,
                             style:
                             TextStyle(fontSize: 16.0, color: Colors.white)),
@@ -65,7 +57,7 @@ class AlertPage extends StatelessWidget {
               if (args.doBiometricTest)
                 FloatingActionButton(
                   onPressed: () {
-                    print('hiciste click');
+                    Navigator.pushNamed(context, '/mainpage');
                   },
                     elevation: 0.0,
                     backgroundColor: MyConstants.of(context).pink,

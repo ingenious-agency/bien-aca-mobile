@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// TODO: make MyConstants available without import
+// TODO: remove unnecessary imports
+// TODO: see if there is anything that could be added to ThemeData
 import 'package:bien_aca_quarantine/constants/MyConstants.dart';
 import 'package:bien_aca_quarantine/components/pages/main_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
@@ -19,7 +22,6 @@ class MyApp extends StatelessWidget {
         '/mainpage': (context) => MainPage(),
         '/successpage': (context) => SuccessPage(),
         AlertPage.routeName: (context) => AlertPage(),
-
       },
       title: MyConstants.of(context).mainTitle,
       home: HomePage(),

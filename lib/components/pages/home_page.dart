@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
 //    return TemplateLayout(toRender: 'register');
     return Scaffold(
       body: Center(
+//        TODO: add conditional if registered, go to main
           child: Register()),
     );
   }

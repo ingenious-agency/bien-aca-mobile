@@ -13,6 +13,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
   final _formKey = GlobalKey<FormState>();
 
+//  TODO: find better way to not repeat all this code; maybe a function that creates Controllers.
+//  TODO: that function could receive parameters in order to make this form a really common Widget
   static final nameController = TextEditingController();
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
@@ -62,6 +64,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     'Número de identidad *', identityNumberController),
                 _textFormFieldCreator(
                     'Fecha Nacimiento *', dateOfBirthController),
+//                TODO: remove binary gender in order to make a more inclusive app
                 _textFormFieldCreator('Género *', binaryGenderController),
                 _textFormFieldCreator('Celular *', cellphoneController),
               ]),
