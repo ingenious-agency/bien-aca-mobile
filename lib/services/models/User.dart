@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:bien_aca_quarantine/services/GeofencingService.dart';
+
 enum Gender { MALE, FEMALE }
 final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
@@ -30,6 +32,10 @@ Future<bool> registerUser(
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setString("user", response.body);
+  
+  addHomeGeofence(user);
+  await startGeofencing(10.0);
+  
   return true;
 }
 

@@ -21,7 +21,7 @@ void addHomeGeofence(User user) {
 }
 
 Future<void> startGeofencing(double distance) async {
-  var homeReady = await bg.BackgroundGeolocation.geofenceExists("Home");
+  bool homeReady = await bg.BackgroundGeolocation.geofenceExists("Home");
   if (!homeReady) return;
 
   bg.BackgroundGeolocation.ready(bg.Config(

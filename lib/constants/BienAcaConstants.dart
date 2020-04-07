@@ -16,20 +16,6 @@ class BienAcaConstants extends InheritedWidget {
   /// Colors
   // ...
 
-  /// TODOS
-  /// - Estructurar proyecto
-  ///  - Terminar de definir consts de textos que ya existen
-  ///  - Definir las pantallas a crear
-  ///  - Definir rutas de pantallas (progresivamente)
-  ///  - Definir componentes common
-  /// - Generar launcher icons
-  /// - Post 14:
-  ///  - Investigar Layout para logo y footer
-  /// - Diseño UI
-  ///  - Mergear con tareas en sprint actual
-  /// BEAR IN MIND
-  /// - Necesitamos un callback para el evento de sendPush por el Backend
-
   @override
   bool updateShouldNotify(BienAcaConstants oldWidget) => false;
 }

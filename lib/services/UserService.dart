@@ -4,7 +4,7 @@ import 'package:bien_aca_quarantine/services/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<User> getCurrentUser() async {
-  var prefs = await SharedPreferences.getInstance();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
   String userValue = prefs.getString("user");
   if (userValue == null) return Future.value(null);
 
