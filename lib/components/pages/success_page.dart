@@ -41,6 +41,7 @@ class SuccessPage extends StatelessWidget {
               SizedBox(height: 20.0),
               OutlineButton(
                 onPressed: () {
+//                  TODO: use replaceNamed
                   Navigator.pushNamed(context, AlertPage.routeName,
                       arguments: AlertPageArguments('Alerta',
                           'Si dentro de los próximos 10 minutos no volvés a la zona permitida, una alerta será enviada al centro de control.', true));
