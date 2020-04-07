@@ -1,3 +1,4 @@
+import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:bien_aca_quarantine/components/common/register.dart';
 
@@ -7,6 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BienAcaConstants.of(context).orange,
       body: Container(
         child: Center(
             child: SingleChildScrollView(
