@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bien_aca_quarantine/components/common/register.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
-
+class InnerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +9,7 @@ class HomePage extends StatelessWidget {
             child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[Register()],
+            children: <Widget>[Text("Hello!")],
           ),
         )),
       ),

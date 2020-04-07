@@ -103,13 +103,19 @@ class RegisterState extends State<Register> {
                 child: Text("Register"),
                 onPressed: () async {
                   if (_fbKey.currentState.saveAndValidate()) {
-                    Scaffold.of(context)
-                        .showSnackBar(SnackBar(content: Text('Sending...')));
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Registering...')));
 
                     bool success = await registerUser(_fbKey.currentState.value,
                         _currentPosition.latitude, _currentPosition.longitude);
-                    if (success)
-                      Navigator.pushReplacementNamed(context, '/mainpage');
+                    if (success) {
+                      Navigator.pushReplacementNamed(context, '/innerpage');
+                    } else {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                              'Opss... Something went wrong registering the user')));
+                    }
                   }
                 },
               ),

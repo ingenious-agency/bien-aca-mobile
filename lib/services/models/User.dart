@@ -29,8 +29,7 @@ Future<bool> registerUser(
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  user = User.fromJson(json.decode(response.body));
-  await prefs.setString("user", jsonEncode(user));
+  await prefs.setString("user", response.body);
   return true;
 }
 

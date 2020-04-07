@@ -1,79 +1,94 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
+    as bg;
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
-import 'package:bien_aca_quarantine/components/pages/main_page.dart';
+import 'package:bien_aca_quarantine/components/pages/inner_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
-// import 'package:bien_aca_quarantine/components/pages/alert_page.dart';
 
 import 'package:bien_aca_quarantine/services/models/Heartbeat.dart';
+import 'package:bien_aca_quarantine/services/models/User.dart';
 
-import 'package:workmanager/workmanager.dart';
-import 'package:geolocator/geolocator.dart';
+// void callbackDispatcher() {
+//   Workmanager.executeTask((taskName, map) async {
+//     switch (taskName) {
+//       case "geofencingInBackground":
+//         try {
+//           final Geolocator geolocator = Geolocator();
+//           Position position = await geolocator.getCurrentPosition(
+//               desiredAccuracy: LocationAccuracy.best);
+//           await sendHeartbeat(position.latitude, position.longitude);
+//         } catch (e) {
+//           print(e);
+//         }
+//         break;
+//       case Workmanager.iOSBackgroundTask:
+//         // Deal with iOS later
+//         break;
+//     }
 
-void callbackDispatcher() {
-  Workmanager.executeTask((taskName, map) {
-    print("entre al back serv");
-    switch (taskName) {
-      case "geofencingInBackground":
-        print("back serv switch android");
-        // /// 1. Get current location
-        // final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+//     //Return true when the task executed successfully or not
+//     return Future.value(true);
+//   });
+// }
 
-        // geolocator
-        //     .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-        //     .then((Position position) async {
-        //   print(position.latitude);
-        //   print(position.longitude);
-        //   /// 2. Send heartbeat
-        //   Heartbeat hb = await sendHeartbeat(position.latitude, position.longitude);
-        //   print(hb.id);
-        //   print(hb.time);
-        //   print(hb.lat);
-        //   print(hb.lng);
-        // }).catchError((e) {
-        //   print(e);
-        // });
-        break;
-      case Workmanager.iOSBackgroundTask:
-        print("back serv switch ios");
-        // /// 1. Get current location
-        // final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-
-        // geolocator
-        //     .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-        //     .then((Position position) async {
-        //   print(position.latitude);
-        //   print(position.longitude);biar y hacer que el geofencing lo haga el front.
-        // Sacando el tiempo de implementación, que ya vemos que es muy difícil llegar para el viernes con todo, que te parece que pueda funcionar mejor de esas dos opciones.
-        //   /// 2. Send heartbeat
-        //   Heartbeat hb = await sendHeartbeat(position.latitude, position.longitude);
-        //   print(hb.id);
-        //   print(hb.time);
-        //   print(hb.lat);
-        //   print(hb.lng);
-        // }).catchError((e) {
-        //   print(e);
-        // });
-        break;
-    }
-
-    //Return true when the task executed successfully or not
-    return Future.value(true);
-  });
-}
+String initialRoute = '/';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // Workmanager.initialize(callbackDispatcher);
-  // Workmanager.registerPeriodicTask(
-  //   "1",
-  //   "geofencingInBackground", //This is the value that will be returned in the callbackDispatcher
-  //   initialDelay: Duration(minutes: 1),
-  //   frequency: Duration(minutes: 15),
-  //   constraints: Constraints(
-  //     networkType: NetworkType.connected,
-  //   ),
-  // );
+
+  SharedPreferences.getInstance().then((prefs) {
+    String userValue = prefs.getString("user");
+    if (userValue == null) return Future.value(null);
+
+    User user;
+    try {
+      user = User.fromJson(jsonDecode(userValue));
+    } catch (e) {}
+
+    if (user != null) {
+      initialRoute = '/innerpage';
+
+      bg.BackgroundGeolocation.addGeofence(bg.Geofence(
+        identifier: "Home",
+        radius: 10,
+        latitude: user.lat,
+        longitude: user.lng,
+        notifyOnEntry: true,
+        notifyOnExit: true,
+        notifyOnDwell: true,
+        loiteringDelay: 15000, // 15 secs
+      )).then((bool success) {
+        print('[addGeofence] success');
+      }).catchError((error) {
+        print('[addGeofence] FAILURE: $error');
+      });
+
+      bg.BackgroundGeolocation.ready(bg.Config(
+              desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
+              distanceFilter: 10.0,
+              stopOnTerminate: false,
+              startOnBoot: true,
+              debug: true,
+              heartbeatInterval: 60,
+              preventSuspend: true,
+              logLevel: bg.Config.LOG_LEVEL_VERBOSE))
+          .then((bg.State state) {
+        if (!state.enabled) {
+          bg.BackgroundGeolocation.start();
+        }
+      });
+
+      bg.BackgroundGeolocation.onGeofence((bg.GeofenceEvent event) {
+        sendHeartbeat(
+            event.location.coords.latitude, event.location.coords.longitude);
+      });
+    }
+    return Future.value(null);
+  });
 
   runApp(BienAcaConstants(
     child: MyApp(),
@@ -84,10 +99,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      initialRoute: initialRoute,
       routes: {
-        '/mainpage': (context) => MainPage(),
-        // '/alertpage': (context) => AlertPage(),
+        '/innerpage': (context) => InnerPage(),
       },
       title: BienAcaConstants.of(context).mainTitle,
       theme: ThemeData(
