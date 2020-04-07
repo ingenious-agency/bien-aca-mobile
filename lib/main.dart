@@ -12,29 +12,6 @@ import 'package:bien_aca_quarantine/components/pages/home_page.dart';
 import 'package:bien_aca_quarantine/services/models/Heartbeat.dart';
 import 'package:bien_aca_quarantine/services/models/User.dart';
 
-// void callbackDispatcher() {
-//   Workmanager.executeTask((taskName, map) async {
-//     switch (taskName) {
-//       case "geofencingInBackground":
-//         try {
-//           final Geolocator geolocator = Geolocator();
-//           Position position = await geolocator.getCurrentPosition(
-//               desiredAccuracy: LocationAccuracy.best);
-//           await sendHeartbeat(position.latitude, position.longitude);
-//         } catch (e) {
-//           print(e);
-//         }
-//         break;
-//       case Workmanager.iOSBackgroundTask:
-//         // Deal with iOS later
-//         break;
-//     }
-
-//     //Return true when the task executed successfully or not
-//     return Future.value(true);
-//   });
-// }
-
 String initialRoute = '/';
 
 void main() {
