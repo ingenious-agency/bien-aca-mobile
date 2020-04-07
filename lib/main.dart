@@ -10,8 +10,6 @@ import 'package:bien_aca_quarantine/services/UserService.dart';
 import 'package:bien_aca_quarantine/services/GeofencingService.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
   runApp(BienAcaConstants(
     child: MyApp(),
   ));
