@@ -1,38 +1,27 @@
 import 'package:flutter/material.dart';
 
+import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 import 'package:bien_aca_quarantine/components/common/register.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
+import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 
-class _HomePageState extends State<HomePage> {
-  // bool _showRegister;
+class HomePage extends StatelessWidget {
+  const HomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      backgroundColor: BienAcaConstants.of(context).orange,
+      body: DesignLayout(
+          content: Container(
         child: Center(
             child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // _showRegister == true
-              /* ? */ Register()
-              // : RaisedButton(
-              //     child: Text("Registrate para empezar"),
-              //     onPressed: () {
-              //       setState(() {
-              //         _showRegister = true;
-              //       });
-              //     },
-              //   ),
-            ],
+            children: <Widget>[Register()],
           ),
         )),
-      ),
+      )),
     );
   }
 }

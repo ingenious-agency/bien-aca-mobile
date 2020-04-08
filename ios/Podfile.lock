@@ -1,0 +1,85 @@
+PODS:
+  - background_fetch (0.5.5):
+    - Flutter
+  - CocoaLumberjack (3.6.1):
+    - CocoaLumberjack/Core (= 3.6.1)
+  - CocoaLumberjack/Core (3.6.1)
+  - Flutter (1.0.0)
+  - flutter_background_geolocation (1.7.1):
+    - CocoaLumberjack (~> 3.6.0)
+    - Flutter
+  - flutter_keyboard_visibility (0.7.0):
+    - Flutter
+  - geolocator (5.3.0):
+    - Flutter
+  - google_api_availability (2.0.3):
+    - Flutter
+  - local_auth (0.0.1):
+    - Flutter
+  - location_permissions (2.0.5):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+  - shared_preferences_macos (0.0.1):
+    - Flutter
+  - shared_preferences_web (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - background_fetch (from `.symlinks/plugins/background_fetch/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_background_geolocation (from `.symlinks/plugins/flutter_background_geolocation/ios`)
+  - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
+  - geolocator (from `.symlinks/plugins/geolocator/ios`)
+  - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
+  - local_auth (from `.symlinks/plugins/local_auth/ios`)
+  - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
+  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+
+EXTERNAL SOURCES:
+  background_fetch:
+    :path: ".symlinks/plugins/background_fetch/ios"
+  Flutter:
+    :path: Flutter
+  flutter_background_geolocation:
+    :path: ".symlinks/plugins/flutter_background_geolocation/ios"
+  flutter_keyboard_visibility:
+    :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
+  geolocator:
+    :path: ".symlinks/plugins/geolocator/ios"
+  google_api_availability:
+    :path: ".symlinks/plugins/google_api_availability/ios"
+  local_auth:
+    :path: ".symlinks/plugins/local_auth/ios"
+  location_permissions:
+    :path: ".symlinks/plugins/location_permissions/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  shared_preferences_macos:
+    :path: ".symlinks/plugins/shared_preferences_macos/ios"
+  shared_preferences_web:
+    :path: ".symlinks/plugins/shared_preferences_web/ios"
+
+SPEC CHECKSUMS:
+  background_fetch: 733393ca9893eadff0f7297a3818afe57fd68cb1
+  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_background_geolocation: 003af3f973a6a6cc8d7b19ddedad13210083466f
+  flutter_keyboard_visibility: 6195387fb6d8f46e5cd6dda4a4154e41f800f545
+  geolocator: 7cdcf71180b80913b3cd84ab715d3b5365b378af
+  google_api_availability: 526574c9a5a0ae541e18c65f98e47afc11f53c8b
+  local_auth: 17f985934bb4ab2637431e5b3fe1b2d6698d2051
+  location_permissions: 4a49d4e5bec5b653643e551ab77963cc99bb0e4a
+  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
+  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
+
+PODFILE CHECKSUM: 1c019deae9eeb943376f64565e9388a8605cd58a
+
+COCOAPODS: 1.8.4

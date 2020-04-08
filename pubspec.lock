@@ -22,6 +22,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+  background_fetch:
+    dependency: transitive
+    description:
+      name: background_fetch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.5"
   boolean_selector:
     dependency: transitive
     description:
@@ -64,6 +71,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+  date_range_picker:
+    dependency: transitive
+    description:
+      name: date_range_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.6"
+  datetime_picker_formfield:
+    dependency: transitive
+    description:
+      name: datetime_picker_formfield
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.3"
+  dependencies:
+    dependency: "direct main"
+    description:
+      name: dependencies
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5"
+  disposables:
+    dependency: transitive
+    description:
+      name: disposables
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   equatable:
     dependency: transitive
     description:
@@ -76,11 +111,46 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_background_geolocation:
+    dependency: "direct main"
+    description:
+      name: flutter_background_geolocation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.7.1"
+  flutter_chips_input:
+    dependency: transitive
+    description:
+      name: flutter_chips_input
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.7.0"
+  flutter_form_builder:
+    dependency: "direct main"
+    description:
+      name: flutter_form_builder
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.7.2"
+  flutter_keyboard_visibility:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_typeahead:
+    dependency: transitive
+    description:
+      name: flutter_typeahead
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.8.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -245,6 +315,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  sy_flutter_widgets:
+    dependency: transitive
+    description:
+      name: sy_flutter_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   term_glyph:
     dependency: transitive
     description:
@@ -266,6 +343,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  validators:
+    dependency: transitive
+    description:
+      name: validators
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+1"
   vector_math:
     dependency: transitive
     description:

@@ -1,41 +1,58 @@
-/// En este archivo van todos los alerts, con un display utilizando message_display.dart
-/// BEAR IN MIND: Flagear display de prueba biometrica; NO UTILIZAR PushReplaceNamed, sino que bloquear el pop con un widget
-/// Este Widget es el focus de navigation para el event de sendPush por parte de rails
 import 'package:flutter/material.dart';
 
-import 'package:bien_aca_quarantine/components/common/register.dart';
+import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
-class AlertPage extends StatefulWidget {
-  @override
-  _AlertPageState createState() => _AlertPageState();
-}
+import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 
-class _AlertPageState extends State<AlertPage> {
-  // bool _showRegister;
-
+class AlertPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-            child: SingleChildScrollView(
+        backgroundColor: BienAcaConstants.of(context).lightPink,
+        body: DesignLayout(
+            content: Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              // _showRegister == true
-              /* ? */ Register()
-              // : RaisedButton(
-              //     child: Text("Registrate para empezar"),
-              //     onPressed: () {
-              //       setState(() {
-              //         _showRegister = true;
-              //       });
-              //     },
-              //   ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.report_problem,
+                    color: Colors.white,
+                    size: 40.0,
+                  ),
+                  SizedBox(width: 20.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Has fallado",
+                          style: TextStyle(
+                              fontSize: 28.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'RobotoSlab',
+                              color: Colors.white)),
+                      Text("Intentalo de nuevo",
+                          style:
+                              TextStyle(fontSize: 16.0, color: Colors.white)),
+                      SizedBox(height: 20.0),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.0),
+              FloatingActionButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                elevation: 0.0,
+                backgroundColor: BienAcaConstants.of(context).pink,
+                child: Text("Ok"),
+              )
             ],
           ),
-        )),
-      ),
-    );
+        )));
   }
 }

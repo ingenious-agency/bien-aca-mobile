@@ -1,26 +1,33 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<Heartbeat> sendHeartbeat(lat, long) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  int userId = prefs.getInt("userId");
-  // Local
-  String baseUrl = 'http://10.0.2.2:3000';
+import 'package:bien_aca_quarantine/services/models/User.dart';
 
-  final response = await http.post(
-      '$baseUrl/users/$userId/heartbeats',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1ODQ3MTQwOTh9.2aeVZbv6uf2675F4VoYEM7tRLXpDBwE6PMzFzCQS02g"
-        },
-      body: '{ "time": "${DateTime.now()}", "lat": "$lat", "long": "$long" }');
+final serverUrl = 'https://bian-aca-prod.herokuapp.com';
+
+Future<Heartbeat> sendHeartbeat(lat, lng) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  User user = User.fromJson(jsonDecode(prefs.getString("user")));
+  if (user == null) return Future.value(null);
+
+  Heartbeat heartbeat = Heartbeat(
+      userId: user.id,
+      time: DateTime.now().toIso8601String(),
+      lat: lat,
+      lng: lng);
+
+  final jsonHeartbeat = jsonEncode(heartbeat);
+
+  final response = await http.post('$serverUrl/users/${user.id}/heartbeats',
+      headers: {"Content-Type": "application/json"}, body: jsonHeartbeat);
 
   if (response.statusCode == 201) {
-    Heartbeat heartbeat = Heartbeat.fromJson(json.decode(response.body)["heartbeat"]);
-    return heartbeat;
+    Heartbeat heartbeat =
+        Heartbeat.fromJson(json.decode(response.body)["heartbeat"]);
+    return Future.value(heartbeat);
   } else {
     throw Exception('Failed to send the heartbeat');
   }
@@ -30,8 +37,8 @@ class Heartbeat {
   final int id;
   final int userId;
   final String time;
-  final String lat;
-  final String lng;
+  final double lat;
+  final double lng;
   final bool withinFence;
 
   Heartbeat(
@@ -42,9 +49,20 @@ class Heartbeat {
       id: json['id'],
       userId: json['user_id'],
       time: json['time'],
-      lat: json['lat'],
-      lng: json['lng'],
+      lat: double.parse(json['lat']),
+      lng: double.parse(json['lng']),
       withinFence: json['within_fence'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'heartbeat': {
+        'id': id,
+        'time': time,
+        'lat': lat,
+        'lng': lng,
+      }
+    };
   }
 }
