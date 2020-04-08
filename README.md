@@ -1,36 +1,54 @@
-# Bien Acá
+# Bienacá!
+###  Atuar bien, hoy y rcápido
+Desarrollamos **Bien Acá**, una solución Open Source gratuita compuesta de herramientas fundamentales, expandibles y totalmente customizables, para que puedas ocuparte de lo más importante, seguir salvando vidas en tu país.
 
-A geolocator and geotracking project.
+El sistema funciona con un único y simple centro de control que recibe alertas sobre los dispositivos vinculados y así puede cnetrar sus esfuerzos en aquellas incidencias que lo requieran, activando llamadas, protocols e inspecciones solamente en casos estrictamente necesarios, potenciando sus capacidades y la gestión de los recursos.
 
-## Getting Started
+## Control de cuarentena obligatoria 🧐
+Controlar una cuarentena obligatoria se vuelve cada vez más complejo a medida que el número de casos requeridos aumenta. Existen soluciones en el mercado basadas en rastreo móvil que notifican al centro de control si el dispositivo sale de una zona determinada, aunque no aseguran que el individuo se encuentre efectivamente junto a dicho dispositivo.
 
-```bash
-cd bien-aca-mobile
-# Initial installation
-flutter pub get
-# To run application
-flutter run
-```
+Nuestra solución utiliza el análisis biométrico para certificar y asegurar que es el sujeto quien no deja dicha zona y se encuentra con el dispositivo registrado.
 
-## Build appbundle (testing for Android)
-1. Go to: cd <app_dir>
-  (Replace <app_dir> with your application’s directory.)
+### Cómo funciona
+1. Se instala en el móvil de la persona a seguir una aplicación que envía información de geolocalización al sistema central.
+2. De perderse contacto con el dispositivo (estado sin conectividad o apagado) o el dispositivo salga de la zona establecida, una primer alerta a modo de preaviso se genera para la persona.
+3. De no regresar a la zona establecida dentro del tiempo elegido por el prestador, una alerta es enviada: primero al usuario y luego al al centro de control.
+4. Adicionalmente y varias veces al día de forma randómica, la aplicación pide al usuario certifique su identidad mediante sensor biométrico, en este caso, huella dactilar.
+5. De no verificar identidad, se envía una alerta al centro de control.
+ 
+*El sistema ha sido diseñado para desalentar las acciones no deseadas y minimizar el trabajo de los centros de control: cada vez que una alerta es enviada, es el usuario mismo quien recibe una notificación a modo de aviso previo en su dispositivo, ahorrando tiempo, esfuerzo y dinero a los prestadores.*
 
-2. Run flutter build appbundle
-  (Running flutter build defaults to a release build.)
+### Qué tenemos implementado Mobile
+- Registración de usuario
+- Servicio de Geofencing
+- Heartbeat de reporte continuo
 
-For full docs, see https://flutter.dev/docs/deployment/android
+### Qué tenemos implementado Backend
+- Registro y Login de usuario
+- Sistema de Heartbeat
+- Interface para admins
 
-## Build and release on TestFlight (testing for iOS)
-1. Please check this settings are reviewed before building: https://flutter.dev/docs/deployment/ios#review-xcode-project-settings
+### Qué faltaría implementar
+- Test biométrico
+- Notificaciones
 
-2. Go to: cd <app_dir>
-  (Replace <app_dir> with your application’s directory.)
+## Control y calma en tiempos de crisis 😌
 
-3. Run flutter build ios to create a release build (flutter build defaults to --release).
-   To ensure that Xcode refreshes the release mode configuration, close and re-open your Xcode workspace. For Xcode 8.3 and later, this step is not required.
-   For more details, see https://flutter.dev/docs/deployment/ios#create-a-build-archive
+Creemos en BienAcá como una solución integral, de implementación rápida pero ampliamente flexible a las necesidades de un contexto en crisis. Fue diseñada para proveer tranquilidad y acierto en momentos extremos. Pensada para cuidar tiempo y dinero; creada para actuar hoy y estar tranquilos mañana.
 
-4. Release the app on TestFlight https://flutter.dev/docs/deployment/ios#release-your-app-on-testflight
+#### Coordinación entre equipos
+En tiempos de crisis la coordinación es fundamental, esta aplicación puede centralizar y simplificar alarmas y eventos.
+#### Manejo de recursos médicos
+Supervisar recursos tales como salas, equipamientos de alto costo y otros materiales para mantener un traqueo a tiempo real de los mismos.
+#### Información sobre posible interacción con caso confirmado
+La cuarentena voluntaria requiere de motivación por parte de la población. La aplicación puede ser modificada para notificar a la población que ha tenido contacto (mediante georeferenciación) con un caso conocido.
+#### Gestión y verificación de Permisos de salida
+Una vez que un individuo es inmune a la enfermedad y es seguro que retorne al trabajo se le adjudica un certificado digital, vinculado a la prueba clínica, que lo habilita a volver a circular libremente y asistir a su lugar de
+trabajo.
+#### Luego de la crisis sanitaria puede ser utilizada para:
+Medidas cautelares de bajo riesgo como la prohibición de asistir determinadas reuniones, recintos o
+espectáculos públicos, o de visitar determinados lugares o de aproximarse a cierta persona
 
-For full docs, see https://flutter.dev/docs/deployment/ios
+# Actuemos juntos!
+
+![](images/ingenious-logo-horizontal-color-200.png)
