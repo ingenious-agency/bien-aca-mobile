@@ -1,12 +1,16 @@
-import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
+
+import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 
 class InnerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BienAcaConstants.of(context).lightBlue,
-      body: Container(
+      body: DesignLayout(
+          content: Container(
         child: Center(
             child: SingleChildScrollView(
           child: Padding(
@@ -15,20 +19,20 @@ class InnerPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Estás en cuarentena!',
+                  Text(BienAcaConstants.of(context).innerpageTitle,
                       style: Theme.of(context).textTheme.headline),
                   SizedBox(height: 10.0),
                   Text(
-                      'En caso de salir de tu zona o no cumplir con las pruebas biométicas, un preaviso te notificará.',
+                      BienAcaConstants.of(context).innerpageBody1,
                       style: Theme.of(context).textTheme.body1),
                   SizedBox(height: 10.0),
                   Text(
-                      'Si en el lapso de 10 minutos no corregís la situación, una alerta será enviada al centro de control y esta aplicación quedará bloqueada.',
+                      BienAcaConstants.of(context).innerpageBody2,
                       style: Theme.of(context).textTheme.body1),
                 ],
               )),
         )),
-      ),
+      )),
     );
   }
 }
