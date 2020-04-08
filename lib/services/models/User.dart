@@ -15,7 +15,7 @@ Future<bool> registerUser(
       name: userData['name'],
       identityNumber: userData['identity_number'],
       dateOfBirth: userData['date_of_birth'],
-      gender: userData['gender'] == 'Male' ? Gender.MALE : Gender.FEMALE,
+      gender: userData['gender'] == 'Masculino' ? Gender.MALE : Gender.FEMALE,
       cellphone: userData['cellphone'],
       password: userData['password'],
       passwordConfirmation: userData['password_confirmation'],
