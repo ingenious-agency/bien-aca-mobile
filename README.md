@@ -1,5 +1,5 @@
 # Bienacá!
-###  Atuar bien, hoy y rcápido
+###  Actuar bien, hoy y rápido
 Desarrollamos **Bien Acá**, una solución Open Source gratuita compuesta de herramientas fundamentales, expandibles y totalmente customizables, para que puedas ocuparte de lo más importante, seguir salvando vidas en tu país.
 
 El sistema funciona con un único y simple centro de control que recibe alertas sobre los dispositivos vinculados y así puede cnetrar sus esfuerzos en aquellas incidencias que lo requieran, activando llamadas, protocols e inspecciones solamente en casos estrictamente necesarios, potenciando sus capacidades y la gestión de los recursos.
