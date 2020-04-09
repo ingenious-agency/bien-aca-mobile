@@ -44,6 +44,16 @@ class _MyAppState extends State<MyApp> {
     initializeLocalNotifications(onDidReceiveLocalNotification);
   }
 
+//  @override
+//  void dispose() {
+//    getCurrentUser().then((user) async {
+//      if(await hasCurrentUser()) {
+//        removeHomeGeofence(user);
+//      }
+//    });
+//    super.dispose();
+//  }
+
   Future onDidReceiveLocalNotification(
       int id, String title, String body, String payload) async {
     // display a dialog with the notification details, tap ok to go to another page

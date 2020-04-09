@@ -39,6 +39,25 @@ Future<void> generateDailyNotification(Time dayTime) async {
       0, "Prueba de vida", "Ingrese a la app para probar que está con su celular.", dayTime, notificationDetails);
 }
 
+void generateInstantNotification(String title, String body) async {
+  AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'instant_alert',
+      'Instant alert',
+      'Instant alert notification to notify the user as soon as possible');
+  IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  NotificationDetails platformChannelSpecifics = NotificationDetails(
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  try {
+    await flutterLocalNotificationsPlugin.show(
+        1, title, body, platformChannelSpecifics);
+  } catch (e) {
+    print(e);
+  }
+}
+
+
+
+
 Future<void> onSelectNotification(String payload) {
   if (payload != null) {
     debugPrint('notification payload: ' + payload);

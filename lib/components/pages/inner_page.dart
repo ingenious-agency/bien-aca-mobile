@@ -1,10 +1,48 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
+import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
+as bg;
 
-class InnerPage extends StatelessWidget {
+class InnerPage extends StatefulWidget {
+  @override
+  _InnerPageState createState() => _InnerPageState();
+}
+
+
+class _InnerPageState extends State<InnerPage> {
+  @override
+  void initState() {
+    super.initState();
+    initializeLocalNotifications(onDidReceiveLocalNotification);
+  }
+
+  Future onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
+    // display a dialog with the notification details, tap ok to go to another page
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(body),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () async {
+              print("On pressed");
+            },
+            child: Text('Ok'),
+          )
+        ],
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +67,12 @@ class InnerPage extends StatelessWidget {
                   Text(
                       BienAcaConstants.of(context).innerpageBody2,
                       style: Theme.of(context).textTheme.body1),
+                  FlatButton(
+                    onPressed: () {
+                      generateInstantNotification('instant notification', 'body of the instant notificaction');
+                    },
+                    child: Text('notificame que me gusta'),
+                  ),
                 ],
               )),
         )),

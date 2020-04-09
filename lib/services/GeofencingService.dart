@@ -20,11 +20,18 @@ void addHomeGeofence(User user) {
   });
 }
 
+void removeHomeGeofence(User user) {
+  bg.BackgroundGeolocation.removeGeofence('Home')
+      .then((bool success) {
+        print('[removeGeofence] success');
+  });
+}
+
 Future<void> startGeofencing(double distance) async {
   bool homeReady = await bg.BackgroundGeolocation.geofenceExists("Home");
   if (!homeReady) return;
 
-  bg.BackgroundGeolocation.ready(bg.Config(
+  await bg.BackgroundGeolocation.ready(bg.Config(
           desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
           distanceFilter: distance,
           stopOnTerminate: false,
@@ -34,12 +41,15 @@ Future<void> startGeofencing(double distance) async {
           preventSuspend: true,
           logLevel: bg.Config.LOG_LEVEL_VERBOSE))
       .then((bg.State state) {
-    if (!state.enabled) {
+    print("<========= state bgGeo: $state ============>");
+
+//    if (!state.enabled) {
       bg.BackgroundGeolocation.start();
-    }
+//    }
   });
 
   bg.BackgroundGeolocation.onGeofence((bg.GeofenceEvent event) {
+    print('<============== GeofenceEvent: $event ==================>');
     sendHeartbeat(
         event.location.coords.latitude, event.location.coords.longitude);
   });
