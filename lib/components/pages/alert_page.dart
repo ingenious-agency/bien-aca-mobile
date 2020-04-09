@@ -28,13 +28,13 @@ class AlertPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text("Has fallado",
+                      Text("Saliste de tu zona",
                           style: TextStyle(
                               fontSize: 28.0,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'RobotoSlab',
                               color: Colors.white)),
-                      Text("Intentalo de nuevo",
+                      Text("Ohhhhh!!",
                           style:
                               TextStyle(fontSize: 16.0, color: Colors.white)),
                       SizedBox(height: 20.0),
@@ -43,14 +43,14 @@ class AlertPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20.0),
-              FloatingActionButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                elevation: 0.0,
-                backgroundColor: BienAcaConstants.of(context).pink,
-                child: Text("Ok"),
-              )
+//              FloatingActionButton(
+//                onPressed: () {
+//                  Navigator.pop(context);
+//                },
+//                elevation: 0.0,
+//                backgroundColor: BienAcaConstants.of(context).pink,
+//                child: Text("Ok"),
+//              )
             ],
           ),
         )));

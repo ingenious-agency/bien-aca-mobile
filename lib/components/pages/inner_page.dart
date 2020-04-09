@@ -69,7 +69,8 @@ class _InnerPageState extends State<InnerPage> {
                       style: Theme.of(context).textTheme.body1),
                   FlatButton(
                     onPressed: () {
-                      generateInstantNotification('instant notification', 'body of the instant notificaction');
+                      generateInstantNotification('te saliste chinguenguencha!', 'Una alarma ha sido enviada al centro de control. Agarrate!');
+                      Navigator.pushReplacementNamed(context, '/alertpage');
                     },
                     child: Text('notificame que me gusta'),
                   ),

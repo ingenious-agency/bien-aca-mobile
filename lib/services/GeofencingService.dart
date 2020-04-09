@@ -1,7 +1,10 @@
 import 'package:bien_aca_quarantine/services/models/Heartbeat.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
 import 'package:bien_aca_quarantine/services/models/User.dart';
+import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
+
 
 void addHomeGeofence(User user) {
   bg.BackgroundGeolocation.addGeofence(bg.Geofence(
@@ -48,9 +51,12 @@ Future<void> startGeofencing(double distance) async {
 //    }
   });
 
-  bg.BackgroundGeolocation.onGeofence((bg.GeofenceEvent event) {
+  bg.BackgroundGeolocation.onGeofence((bg.GeofenceEvent event) async {
     print('<============== GeofenceEvent: $event ==================>');
-    sendHeartbeat(
+    var heartbeat = await sendHeartbeat(
         event.location.coords.latitude, event.location.coords.longitude);
+    if(heartbeat.withinFence == false) {
+      generateInstantNotification('te juite e la zona', 'now, agarrate!');
+    }
   });
 }
