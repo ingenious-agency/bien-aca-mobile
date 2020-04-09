@@ -22,12 +22,10 @@ class InnerPage extends StatelessWidget {
                   Text(BienAcaConstants.of(context).innerpageTitle,
                       style: Theme.of(context).textTheme.headline),
                   SizedBox(height: 10.0),
-                  Text(
-                      BienAcaConstants.of(context).innerpageBody1,
+                  Text(BienAcaConstants.of(context).innerpageBody1,
                       style: Theme.of(context).textTheme.body1),
                   SizedBox(height: 10.0),
-                  Text(
-                      BienAcaConstants.of(context).innerpageBody2,
+                  Text(BienAcaConstants.of(context).innerpageBody2,
                       style: Theme.of(context).textTheme.body1),
                 ],
               )),

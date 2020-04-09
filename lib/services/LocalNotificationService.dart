@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -8,7 +6,8 @@ AndroidInitializationSettings initializationSettingsAndroid;
 IOSInitializationSettings initializationSettingsIOS;
 InitializationSettings initializationSettings;
 
-void initializeLocalNotifications(onDidReceiveLocalNotification) async {
+void initializeLocalNotifications(onDidReceiveLocalNotification, onSelectNotification) async {
+  print(onDidReceiveLocalNotification);
   initializationSettingsAndroid = AndroidInitializationSettings('icon');
   initializationSettingsIOS = IOSInitializationSettings(
     requestAlertPermission: true,
@@ -23,10 +22,10 @@ void initializeLocalNotifications(onDidReceiveLocalNotification) async {
       onSelectNotification: onSelectNotification);
 }
 
-Future<void> generateDailyNotification(Time dayTime) async {
+Future<void> generateDailyNotification(int id, hours, minutes, seconds) async {
   AndroidNotificationDetails androidNotificationDetails =
-      AndroidNotificationDetails('repeat_daily_at_time',
-          'Repeat daily at time', 'Repeats a daily notification several times on a day.',
+      AndroidNotificationDetails('repeat_daily_at_time', 'Repeat daily at time',
+          'Repeats a daily notification several times on a day.',
           priority: Priority.High,
           importance: Importance.Max,
           ticker: 'repeatDailyAtTime');
@@ -36,13 +35,10 @@ Future<void> generateDailyNotification(Time dayTime) async {
       NotificationDetails(androidNotificationDetails, iosNotificationDetails);
 
   await flutterLocalNotificationsPlugin.showDailyAtTime(
-      0, "Prueba de vida", "Ingrese a la app para probar que está con su celular.", dayTime, notificationDetails);
-}
-
-Future<void> onSelectNotification(String payload) {
-  if (payload != null) {
-    debugPrint('notification payload: ' + payload);
-  }
-  // Here you can set navigations when notification is sent
-  return null;
+      id,
+      "Prueba de vida",
+      "Ingrese a la app para probar que está con su celular.",
+      Time(hours, minutes, seconds),
+      notificationDetails,
+      payload: "gotoBiometrics");
 }
