@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
 
           var heartbeat = await sendHeartbeat(
               event.location.coords.latitude, event.location.coords.longitude);
-          await setWithinFence(heartbeat.withinFence);
           if (heartbeat.withinFence == false) {
             generateInstantNotification(
                 'Saliste de la zona', 'Saliste de la zona');
