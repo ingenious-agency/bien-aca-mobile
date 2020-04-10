@@ -37,9 +37,7 @@ Future<bool> registerUser(
   addHomeGeofence(user);
   await startGeofencing(10.0);
   // Generate 3 initial daily notifications for biometric tests (id, hours, minutes, seconds)
-  await generateDailyNotification(1, 10, 00, 00);
-  await generateDailyNotification(2, 15, 30, 00);
-  await generateDailyNotification(3, 20, 00, 00);
+//  await generateDailyNotification(2, 15, 55, 0, 'doBiometrics');
 
   return true;
 }

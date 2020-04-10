@@ -44,7 +44,7 @@ class BienAcaConstants extends InheritedWidget {
   final String innerpageBody1 = 'En caso de salir de tu zona o no cumplir con las pruebas biométicas, un preaviso te notificará.';
   final String innerpageBody2 = 'Si en el lapso de 10 minutos no corregís la situación, una alerta será enviada al centro de control y esta aplicación quedará bloqueada.';
   final String alertPageOutOfZoneTitle = 'Saliste de la zona';
-  final String alertPageOutOfZoneBody = 'Una alarma ha sido enviada al centro de control';
+  final String alertPageOutOfZoneBody = 'Una alarma ha sido enviada al centro de control.';
   final String alertBiometricsTitle = 'Prueba de identidad';
   final String alertBiometricsBody = 'Necesitamos verificar que seas el dueño del teléfono.';
   final String errorPageTitle = 'Error de registro';

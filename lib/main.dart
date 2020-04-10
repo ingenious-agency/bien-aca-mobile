@@ -1,3 +1,4 @@
+import 'package:bien_aca_quarantine/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,11 +11,10 @@ import 'package:bien_aca_quarantine/components/pages/alert_page_biometrics.dart'
 import 'package:bien_aca_quarantine/components/pages/alert_page_out_of_zone.dart';
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
-import 'package:bien_aca_quarantine/services/UserService.dart';
-import 'package:bien_aca_quarantine/services/GeofencingService.dart';
-import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
+import 'package:bien_aca_quarantine/services/NavigationService.dart';
 
 void main() {
+  setupLocator();
   runApp(BienAcaConstants(
     child: MyApp(),
   ));
@@ -28,58 +28,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/alertpagebiometrics';
-  bool goToInnerPage = false;
-
-  Future<void> onSelectNotification(String payload) {
-    print(payload);
-    if (payload != null) {}
-  }
-
-  Future onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
-    return CupertinoAlertDialog(
-      title: Text(title),
-      content: Text(body),
-      actions: <Widget>[
-        CupertinoDialogAction(
-            isDefaultAction: true,
-            onPressed: () {
-              print("On Pressed");
-            },
-            child: Text("Okay")),
-      ],
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initializeLocalNotifications(
-        onDidReceiveLocalNotification, onSelectNotification);
-    getCurrentUser().then((user) async {
-      if (await hasCurrentUser()) {
-        setState(() {
-          initialRoute = '/alertpagebiometrics';
-          goToInnerPage = true;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: initialRoute,
-      routes: {
-        '/innerpage': (context) => InnerPage(),
-        '/successpage': (context) => SuccessPage(),
-        '/errorpageregistration': (context) => ErrorPage(),
-        '/errorpagenotauthenticated': (context) => ErrorPageNotAuthenticated(),
-        '/alertpageoutofzone': (context) => AlertPageOutOfZone(),
-        '/biometrics': (context) => AlertPageOutOfZone(),
-        '/alertpagebiometrics': (context) => AlertPageBiometrics(),
-      },
       title: BienAcaConstants.of(context).mainTitle,
       theme: ThemeData(
           fontFamily: 'OpenSans',
@@ -92,28 +43,30 @@ class _MyAppState extends State<MyApp> {
             body1: TextStyle(
                 fontSize: 16.0, color: BienAcaConstants.of(context).blue),
           )),
-      home: goToInnerPage ? InnerPage() : HomePage(),
-    );
-  }
-
-  Future _onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
-    // display a dialog with the notification details, tap ok to go to another page
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(title),
-        content: Text(body),
-        actions: <Widget>[
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            onPressed: () async {
-              print("On pressed");
-            },
-            child: Text('Ok'),
-          )
-        ],
-      ),
+      home: HomePage(),
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      onGenerateRoute: (routeSettings) {
+        switch (routeSettings.name) {
+          case 'innerpage':
+            return MaterialPageRoute(builder: (context) => InnerPage());
+          case 'successpage':
+            return MaterialPageRoute(builder: (context) => SuccessPage());
+          case 'alertpageoutofzone':
+            return MaterialPageRoute(
+                builder: (context) => AlertPageOutOfZone());
+          case 'errorpagenotauthenticated':
+            return MaterialPageRoute(
+              builder: (context) => ErrorPageNotAuthenticated());
+          case 'errorpageregistration':
+            return MaterialPageRoute(
+              builder: (context) => ErrorPage());
+          case 'alertpagebiometrics':
+            return MaterialPageRoute(
+                builder: (context) => AlertPageBiometrics());
+          default:
+            return MaterialPageRoute(builder: (context) => HomePage());
+        }
+      },
     );
   }
 }

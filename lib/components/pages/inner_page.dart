@@ -1,16 +1,12 @@
-import 'package:bien_aca_quarantine/services/GeofencingService.dart';
-import 'package:bien_aca_quarantine/services/UserService.dart';
-import 'package:bien_aca_quarantine/services/models/User.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
+
 import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
-import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
-    as bg;
-import 'package:bien_aca_quarantine/services/models/Heartbeat.dart';
+
 
 class InnerPage extends StatefulWidget {
   @override
@@ -21,24 +17,6 @@ class _InnerPageState extends State<InnerPage> {
   @override
   void initState() {
     super.initState();
-    getCurrentUser().then((user) async {
-      if (await hasCurrentUser()) {
-        addHomeGeofence(user);
-        generateDailyNotification(0, 13, 18, 0);
-        await startGeofencing(10.0, onGeofence: (bg.GeofenceEvent event) async {
-          print('<============== bg.GeofenceEvent: $event ==================>');
-
-          var heartbeat = await sendHeartbeat(
-              event.location.coords.latitude, event.location.coords.longitude);
-          if (heartbeat.withinFence == false) {
-            generateInstantNotification(
-                BienAcaConstants.of(context).alertPageOutOfZoneTitle,
-                BienAcaConstants.of(context).alertPageOutOfZoneTitle);
-            Navigator.pushReplacementNamed(context, 'alertpageoutofzone');
-          }
-        });
-      }
-    });
   }
 
   @override

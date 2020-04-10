@@ -1,10 +1,13 @@
 import 'package:bien_aca_quarantine/services/BiometricAuthService.dart';
+import 'package:bien_aca_quarantine/services/NavigationService.dart';
 import 'package:bien_aca_quarantine/services/models/AuthenticationProof.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
+
+import '../../service_locator.dart';
 
 class AlertPageBiometrics extends StatelessWidget {
   @override
@@ -54,13 +57,12 @@ class AlertPageBiometrics extends StatelessWidget {
               FloatingActionButton(
                 onPressed: () async {
                   bool authenticated = await authenticateFingerprint();
-                  if(authenticated) {
-                    sendProof(authenticated);
-                    Navigator.pushReplacementNamed(context, '/innerpage');
-                  };
                   sendProof(authenticated);
-                  Navigator.pushReplacementNamed(context, '/errorpagenotauthenticated');
-                },
+                  if(authenticated) {
+                    locator<NavigationService>().navigateTo('innerpage');
+                  };
+                  locator<NavigationService>().navigateTo('errorpagenotauthenticated');
+                  },
                 elevation: 0.0,
                 backgroundColor: BienAcaConstants.of(context).pink,
                 child: Icon(Icons.fingerprint),

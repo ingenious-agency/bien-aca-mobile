@@ -15,21 +15,20 @@ Future<AuthenticationProof> sendProof(authenticated) async {
   if (user == null) return Future.value(null);
 
   AuthenticationProof authenticationProof = AuthenticationProof(
-      userId: user.id,
-      time: DateTime.now(),
-      authenticated: authenticated
-  );
+      userId: user.id, time: DateTime.now(), authenticated: authenticated);
 
-//  final jsonAuthenticationProof = jsonEncode(authenticationProof);
-//
-//  final response = await http.post('$serverUrl/users/${user.id}/authentication_proofs',
-//      headers: {"Content-Type": "application/json"}, body: jsonAuthenticationProof);
-//
-//  if (response.statusCode == 201) {
+  final jsonAuthenticationProof = jsonEncode(authenticationProof);
+
+  final response = await http.post(
+      '$serverUrl/users/${user.id}/authentication_proofs',
+      headers: {"Content-Type": "application/json"},
+      body: jsonAuthenticationProof);
+
+  if (response.statusCode == 201) {
     return Future.value(authenticationProof);
-//  } else {
-//    throw Exception('Failed to send the authentication proof');
-//  }
+  } else {
+    throw Exception('Failed to send the authentication proof');
+  }
 }
 
 class AuthenticationProof {
@@ -38,8 +37,7 @@ class AuthenticationProof {
   final DateTime time;
   final bool authenticated;
 
-  AuthenticationProof(
-      {this.id, this.userId, this.time, this.authenticated});
+  AuthenticationProof({this.id, this.userId, this.time, this.authenticated});
 
   Map<String, dynamic> toJson() {
     return {
