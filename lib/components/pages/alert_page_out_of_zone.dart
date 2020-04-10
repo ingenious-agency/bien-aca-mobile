@@ -31,12 +31,15 @@ class AlertPageOutOfZone extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(BienAcaConstants.of(context).alertPageOutOfZoneTitle,
-                          style: TextStyle(
-                              fontSize: 28.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'RobotoSlab',
-                              color: Colors.white)),
+                      Container(
+                        width: cWidth,
+                        child: Text(BienAcaConstants.of(context).alertPageOutOfZoneTitle,
+                            style: TextStyle(
+                                fontSize: 28.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'RobotoSlab',
+                                color: Colors.white)),
+                      ),
                       Container(
                         width: cWidth,
                         child: Text(BienAcaConstants.of(context).alertPageOutOfZoneBody,

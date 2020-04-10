@@ -45,7 +45,7 @@ class BienAcaConstants extends InheritedWidget {
   final String innerpageBody2 = 'Si en el lapso de 10 minutos no corregís la situación, una alerta será enviada al centro de control y esta aplicación quedará bloqueada.';
   final String alertPageOutOfZoneTitle = 'Saliste de la zona';
   final String alertPageOutOfZoneBody = 'Una alarma ha sido enviada al centro de control';
-  final String errorPageBodyTitle = 'Hubo un error con tu registro';
+  final String errorPageBodyTitle = 'Error de registro';
   final String errorPagePageBody = 'Por favor, revisá la información enviada y volvé a intentarlo. Muchas gracias!';
 
   @override

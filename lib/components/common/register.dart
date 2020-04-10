@@ -212,10 +212,6 @@ class RegisterState extends State<Register> {
                       if (success) {
                         Navigator.pushReplacementNamed(context, '/successpage');
                       } else {
-                        // Scaffold.of(context).showSnackBar(SnackBar(
-                        //     backgroundColor: Colors.red,
-                        //     content: Text(
-                        //         'Opss... Something went wrong registering the user')));
                         Navigator.pushNamed(context, '/errorpageregistration');
                       }
                     }
