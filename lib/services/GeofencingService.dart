@@ -1,5 +1,7 @@
+import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:bien_aca_quarantine/services/models/Heartbeat.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
 import 'package:bien_aca_quarantine/services/models/User.dart';
@@ -31,6 +33,8 @@ void removeHomeGeofence(User user) {
 }
 
 Future<void> startGeofencing(double distance) async {
+
+  BuildContext context;
   bool homeReady = await bg.BackgroundGeolocation.geofenceExists("Home");
   if (!homeReady) return;
 
@@ -44,19 +48,28 @@ Future<void> startGeofencing(double distance) async {
           preventSuspend: true,
           logLevel: bg.Config.LOG_LEVEL_VERBOSE))
       .then((bg.State state) {
-    print("<========= state bgGeo: $state ============>");
 
-//    if (!state.enabled) {
+    print("<========= state bgGeolocation: $state ============>");
+
+    if (!state.enabled) {
       bg.BackgroundGeolocation.start();
-//    }
+    }
+
   });
 
   bg.BackgroundGeolocation.onGeofence((bg.GeofenceEvent event) async {
-    print('<============== GeofenceEvent: $event ==================>');
-    var heartbeat = await sendHeartbeat(
+    print('<============== bg.GeofenceEvent: $event ==================>');
+
+    Heartbeat heartbeat = await sendHeartbeat(
         event.location.coords.latitude, event.location.coords.longitude);
+
     if(heartbeat.withinFence == false) {
-      generateInstantNotification('te juite e la zona', 'now, agarrate!');
+      generateInstantNotification(
+        BienAcaConstants.of(context).alertPageBodyTitleOutGeofence,
+        BienAcaConstants.of(context).alertPageBodyBodyOutGeofence
+      );
     }
   });
+
+
 }

@@ -7,6 +7,10 @@ import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 class AlertPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double cWidth = MediaQuery
+        .of(context)
+        .size
+        .width * 0.7;
     return Scaffold(
         backgroundColor: BienAcaConstants.of(context).lightPink,
         body: DesignLayout(
@@ -17,7 +21,6 @@ class AlertPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Icon(
                     Icons.report_problem,
@@ -26,17 +29,20 @@ class AlertPage extends StatelessWidget {
                   ),
                   SizedBox(width: 20.0),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Saliste de tu zona",
+                      Text(BienAcaConstants.of(context).alertPageBodyTitleOutGeofence,
                           style: TextStyle(
                               fontSize: 28.0,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'RobotoSlab',
                               color: Colors.white)),
-                      Text("Ohhhhh!!",
-                          style:
-                              TextStyle(fontSize: 16.0, color: Colors.white)),
+                      Container(
+                        width: cWidth,
+                        child: Text(BienAcaConstants.of(context).alertPageBodyBodyOutGeofence,
+                            style:
+                                TextStyle(fontSize: 16.0, color: Colors.white)),
+                      ),
                       SizedBox(height: 20.0),
                     ],
                   ),
