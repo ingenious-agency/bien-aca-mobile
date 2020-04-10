@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bien_aca_quarantine/services/GeofencingService.dart';
+import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
 
 enum Gender { MALE, FEMALE }
 final serverUrl = 'https://bian-aca-prod.herokuapp.com';
@@ -32,10 +33,14 @@ Future<bool> registerUser(
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setString("user", response.body);
-  
+
   addHomeGeofence(user);
   await startGeofencing(10.0);
-  
+  // Generate 3 initial daily notifications for biometric tests (id, hours, minutes, seconds)
+  await generateDailyNotification(1, 10, 00, 00);
+  await generateDailyNotification(2, 15, 30, 00);
+  await generateDailyNotification(3, 20, 00, 00);
+
   return true;
 }
 

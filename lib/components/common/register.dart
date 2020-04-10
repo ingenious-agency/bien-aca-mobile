@@ -212,7 +212,14 @@ class RegisterState extends State<Register> {
                       if (success) {
                         Navigator.pushReplacementNamed(context, '/successpage');
                       } else {
+<<<<<<< HEAD
                         Navigator.pushNamed(context, '/errorpageregistration');
+=======
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text(
+                                'Opss... Something went wrong registering the user')));
+>>>>>>> remotes/origin/feature/biometrics
                       }
                     }
                   },
