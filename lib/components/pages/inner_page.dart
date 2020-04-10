@@ -33,6 +33,7 @@ class _InnerPageState extends State<InnerPage> {
             generateInstantNotification(
                 BienAcaConstants.of(context).alertPageOutOfZoneTitle,
                 BienAcaConstants.of(context).alertPageOutOfZoneTitle);
+            Navigator.pushReplacementNamed(context, 'alertpageoutofzone');
           }
         });
       }
