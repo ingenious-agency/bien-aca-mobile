@@ -48,9 +48,9 @@ class RegisterState extends State<Register> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.0),
-              Text(BienAcaConstants.of(context).registerTitle, style: Theme.of(context).textTheme.headline),
-              Text(
-                  BienAcaConstants.of(context).registerBody,
+              Text(BienAcaConstants.of(context).registerTitle,
+                  style: Theme.of(context).textTheme.headline),
+              Text(BienAcaConstants.of(context).registerBody,
                   style: Theme.of(context).textTheme.body1),
               SizedBox(height: 10.0),
               FormBuilderTextField(
@@ -91,7 +91,8 @@ class RegisterState extends State<Register> {
               FormBuilderTextField(
                 attribute: "identity_number",
                 decoration: InputDecoration(
-                  labelText: BienAcaConstants.of(context).registerIdentityNumberLabel,
+                  labelText:
+                      BienAcaConstants.of(context).registerIdentityNumberLabel,
                   labelStyle: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
@@ -108,7 +109,8 @@ class RegisterState extends State<Register> {
                 attribute: "date_of_birth",
                 inputType: InputType.date,
                 decoration: InputDecoration(
-                  labelText: BienAcaConstants.of(context).registerDateOfBirthLabel,
+                  labelText:
+                      BienAcaConstants.of(context).registerDateOfBirthLabel,
                   labelStyle: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
@@ -143,7 +145,8 @@ class RegisterState extends State<Register> {
               FormBuilderTextField(
                 attribute: "password_confirmation",
                 decoration: InputDecoration(
-                  labelText: BienAcaConstants.of(context).registerPasswordConfirmationLabel,
+                  labelText: BienAcaConstants.of(context)
+                      .registerPasswordConfirmationLabel,
                   labelStyle: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
@@ -173,9 +176,11 @@ class RegisterState extends State<Register> {
                     color: BienAcaConstants.of(context).blue,
                   )),
                 ),
-                initialValue: BienAcaConstants.of(context).registerGenderDropdownItems[0],
+                initialValue:
+                    BienAcaConstants.of(context).registerGenderDropdownItems[0],
                 validators: [FormBuilderValidators.required()],
-                items: BienAcaConstants.of(context).registerGenderDropdownItems
+                items: BienAcaConstants.of(context)
+                    .registerGenderDropdownItems
                     .map((gender) =>
                         DropdownMenuItem(value: gender, child: Text("$gender")))
                     .toList(),
@@ -183,7 +188,8 @@ class RegisterState extends State<Register> {
               FormBuilderTextField(
                 attribute: "cellphone",
                 decoration: InputDecoration(
-                  labelText: BienAcaConstants.of(context).registerCellphoneLabel,
+                  labelText:
+                      BienAcaConstants.of(context).registerCellphoneLabel,
                   labelStyle: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
@@ -202,8 +208,9 @@ class RegisterState extends State<Register> {
                   child: Text(BienAcaConstants.of(context).registerButtonLabel),
                   onPressed: () async {
                     if (_fbKey.currentState.saveAndValidate()) {
-                      Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text(BienAcaConstants.of(context).registerSnackbarLabel)));
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text(BienAcaConstants.of(context)
+                              .registerSnackbarLabel)));
 
                       bool success = await registerUser(
                           _fbKey.currentState.value,

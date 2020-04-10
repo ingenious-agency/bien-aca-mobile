@@ -5,9 +5,6 @@ import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 
-import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
-
-
 class InnerPage extends StatefulWidget {
   @override
   _InnerPageState createState() => _InnerPageState();

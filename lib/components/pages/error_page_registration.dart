@@ -7,10 +7,7 @@ import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double cWidth = MediaQuery
-        .of(context)
-        .size
-        .width * 0.7;
+    double cWidth = MediaQuery.of(context).size.width * 0.7;
     return Scaffold(
         backgroundColor: BienAcaConstants.of(context).lightPink,
         body: DesignLayout(

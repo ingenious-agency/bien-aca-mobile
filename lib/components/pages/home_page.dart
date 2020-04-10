@@ -29,13 +29,9 @@ class _HomePageState extends State<HomePage> {
     getCurrentUser().then((user) async {
       if (await hasCurrentUser()) {
         locator<NavigationService>().navigateTo('innerpage');
-
-//      todo: cherta 2
-//      este toma el _onDidReceive y el _onDid lo manda a outOfZone. Debería hacer otro método _onDidBiometrics por ejemplo? Y cómo funciona el onSelect. A su vez cómo se debería manejar el id? Y fijarse en el User que también lo quiere llamar.
-        generateDailyNotification(0, 16, 23, 0, 'doBiometrics');
-//        generateDailyNotification(0, 15, 31, 0);
-//        generateDailyNotification(0, 15, 32, 0);
-
+        generateDailyNotification(0, 10, 01, 0, 'doBiometrics');
+        generateDailyNotification(0, 16, 02, 0, 'doBiometrics');
+        generateDailyNotification(0, 21, 07, 0, 'doBiometrics');
         addHomeGeofence(user);
         await startGeofencing(150.0,
             onGeofence: (bg.GeofenceEvent event) async {
@@ -44,8 +40,10 @@ class _HomePageState extends State<HomePage> {
           Heartbeat heartbeat = await sendHeartbeat(
               event.location.coords.latitude, event.location.coords.longitude);
           if (heartbeat.withinFence == false) {
-            generateInstantNotification('Saliste de la zona',
-                'Una alarma ha sido enviada al centro de control.', 'alertOutOfZone');
+            generateInstantNotification(
+                'Saliste de la zona',
+                'Una alarma ha sido enviada al centro de control.',
+                'alertOutOfZone');
             locator<NavigationService>().navigateTo('alertpageoutofzone');
           } else {
             locator<NavigationService>().navigateTo('innerpage');
@@ -55,10 +53,10 @@ class _HomePageState extends State<HomePage> {
     });
     initializeLocalNotifications(_onDidReceiveLocalNotification,
         onSelectNotification: (String payload) {
-      if(payload == 'doBiometrics') {
+      if (payload == 'doBiometrics') {
         locator<NavigationService>().navigateTo('alertpagebiometrics');
       }
-      if (payload == 'alertOutOfZone'){
+      if (payload == 'alertOutOfZone') {
         locator<NavigationService>().navigateTo('alertpageoutofzone');
       }
     });

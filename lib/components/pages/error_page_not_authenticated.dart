@@ -7,10 +7,7 @@ import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 class ErrorPageNotAuthenticated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double cWidth = MediaQuery
-        .of(context)
-        .size
-        .width * 0.7;
+    double cWidth = MediaQuery.of(context).size.width * 0.7;
     return Scaffold(
         backgroundColor: BienAcaConstants.of(context).lightPink,
         body: DesignLayout(
@@ -31,7 +28,9 @@ class ErrorPageNotAuthenticated extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(BienAcaConstants.of(context).errorPageNotAuthenticatedTitle,
+                      Text(
+                          BienAcaConstants.of(context)
+                              .errorPageNotAuthenticatedTitle,
                           style: TextStyle(
                               fontSize: 28.0,
                               fontWeight: FontWeight.bold,
@@ -39,7 +38,9 @@ class ErrorPageNotAuthenticated extends StatelessWidget {
                               color: Colors.white)),
                       Container(
                         width: cWidth,
-                        child: Text(BienAcaConstants.of(context).errorPageNotAuthenticatedBody,
+                        child: Text(
+                            BienAcaConstants.of(context)
+                                .errorPageNotAuthenticatedBody,
                             style:
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                       ),

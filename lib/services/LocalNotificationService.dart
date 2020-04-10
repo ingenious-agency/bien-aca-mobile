@@ -25,7 +25,8 @@ void initializeLocalNotifications(onDidReceiveLocalNotification,
       onSelectNotification: onSelectNotification);
 }
 
-Future<void> generateDailyNotification(int id, hours, minutes, seconds, payload) async {
+Future<void> generateDailyNotification(
+    int id, hours, minutes, seconds, payload) async {
   print('<======= daily notification triggered =======>');
   Time dayTime = Time(hours, minutes, seconds);
 
@@ -46,11 +47,11 @@ Future<void> generateDailyNotification(int id, hours, minutes, seconds, payload)
       "Ingrese a la app para probar que está con su celular.",
       dayTime,
       notificationDetails,
-      payload: payload
-  );
+      payload: payload);
 }
 
-void generateInstantNotification(String title, String body, String payload) async {
+void generateInstantNotification(
+    String title, String body, String payload) async {
   AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails('instant_alert', 'Instant alert',
           'Instant alert notification to notify the user as soon as possible');
@@ -58,8 +59,8 @@ void generateInstantNotification(String title, String body, String payload) asyn
   NotificationDetails platformChannelSpecifics = NotificationDetails(
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
   try {
-    await flutterLocalNotificationsPlugin.show(
-        1, title, body, platformChannelSpecifics, payload: payload );
+    await flutterLocalNotificationsPlugin
+        .show(1, title, body, platformChannelSpecifics, payload: payload);
   } catch (e) {
     print(e);
   }

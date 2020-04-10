@@ -1,3 +1,4 @@
+import 'package:bien_aca_quarantine/service_locator.dart';
 import 'package:bien_aca_quarantine/services/BiometricAuthService.dart';
 import 'package:bien_aca_quarantine/services/NavigationService.dart';
 import 'package:bien_aca_quarantine/services/models/AuthenticationProof.dart';
@@ -7,15 +8,10 @@ import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 
-import '../../service_locator.dart';
-
 class AlertPageBiometrics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double cWidth = MediaQuery
-        .of(context)
-        .size
-        .width * 0.7;
+    double cWidth = MediaQuery.of(context).size.width * 0.7;
     return Scaffold(
         backgroundColor: BienAcaConstants.of(context).lightPink,
         body: DesignLayout(
@@ -44,7 +40,8 @@ class AlertPageBiometrics extends StatelessWidget {
                               color: Colors.white)),
                       Container(
                         width: cWidth,
-                        child: Text(BienAcaConstants.of(context).alertBiometricsBody,
+                        child: Text(
+                            BienAcaConstants.of(context).alertBiometricsBody,
                             style:
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                       ),
@@ -58,11 +55,13 @@ class AlertPageBiometrics extends StatelessWidget {
                 onPressed: () async {
                   bool authenticated = await authenticateFingerprint();
                   sendProof(authenticated);
-                  if(authenticated) {
+                  if (authenticated) {
                     locator<NavigationService>().navigateTo('innerpage');
-                  };
-                  locator<NavigationService>().navigateTo('errorpagenotauthenticated');
-                  },
+                  } else {
+                    locator<NavigationService>()
+                        .navigateTo('errorpagenotauthenticated');
+                  }
+                },
                 elevation: 0.0,
                 backgroundColor: BienAcaConstants.of(context).pink,
                 child: Icon(Icons.fingerprint),

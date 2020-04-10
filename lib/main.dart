@@ -56,10 +56,9 @@ class _MyAppState extends State<MyApp> {
                 builder: (context) => AlertPageOutOfZone());
           case 'errorpagenotauthenticated':
             return MaterialPageRoute(
-              builder: (context) => ErrorPageNotAuthenticated());
+                builder: (context) => ErrorPageNotAuthenticated());
           case 'errorpageregistration':
-            return MaterialPageRoute(
-              builder: (context) => ErrorPage());
+            return MaterialPageRoute(builder: (context) => ErrorPage());
           case 'alertpagebiometrics':
             return MaterialPageRoute(
                 builder: (context) => AlertPageBiometrics());

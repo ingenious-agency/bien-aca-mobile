@@ -7,10 +7,7 @@ import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 class AlertPageOutOfZone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double cWidth = MediaQuery
-        .of(context)
-        .size
-        .width * 0.7;
+    double cWidth = MediaQuery.of(context).size.width * 0.7;
     return Scaffold(
         backgroundColor: BienAcaConstants.of(context).lightPink,
         body: DesignLayout(
@@ -33,7 +30,9 @@ class AlertPageOutOfZone extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         width: cWidth,
-                        child: Text(BienAcaConstants.of(context).alertPageOutOfZoneTitle,
+                        child: Text(
+                            BienAcaConstants.of(context)
+                                .alertPageOutOfZoneTitle,
                             style: TextStyle(
                                 fontSize: 28.0,
                                 fontWeight: FontWeight.bold,
@@ -42,7 +41,8 @@ class AlertPageOutOfZone extends StatelessWidget {
                       ),
                       Container(
                         width: cWidth,
-                        child: Text(BienAcaConstants.of(context).alertPageOutOfZoneBody,
+                        child: Text(
+                            BienAcaConstants.of(context).alertPageOutOfZoneBody,
                             style:
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                       ),
