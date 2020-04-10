@@ -8,12 +8,10 @@ import 'package:bien_aca_quarantine/components/pages/error_page_registration.dar
 import 'package:bien_aca_quarantine/components/pages/alert_page_biometrics.dart';
 import 'package:bien_aca_quarantine/components/pages/alert_page_out_of_zone.dart';
 
-
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:bien_aca_quarantine/services/UserService.dart';
 import 'package:bien_aca_quarantine/services/GeofencingService.dart';
 import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
-
 
 void main() {
   runApp(BienAcaConstants(
@@ -35,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    initializeLocalNotifications(_onDidReceiveLocalNotification);
     getCurrentUser().then((user) async {
       if (await hasCurrentUser()) {
         setState(() {
@@ -69,6 +68,27 @@ class _MyAppState extends State<MyApp> {
                 fontSize: 16.0, color: BienAcaConstants.of(context).blue),
           )),
       home: goToInnerPage ? InnerPage() : HomePage(),
+    );
+  }
+
+  Future _onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
+    // display a dialog with the notification details, tap ok to go to another page
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(body),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () async {
+              print("On pressed");
+            },
+            child: Text('Ok'),
+          )
+        ],
+      ),
     );
   }
 }

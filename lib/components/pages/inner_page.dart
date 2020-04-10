@@ -1,3 +1,4 @@
+import 'package:bien_aca_quarantine/services/GeofencingService.dart';
 import 'package:bien_aca_quarantine/services/UserService.dart';
 import 'package:bien_aca_quarantine/services/models/User.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,11 +23,20 @@ class _InnerPageState extends State<InnerPage> {
     super.initState();
     getCurrentUser().then((user) async {
       if (await hasCurrentUser()) {
-        _addHomeGeofence(user);
-        await _startGeofencing(10.0);
+        addHomeGeofence(user);
+        await startGeofencing(10.0, onGeofence: (bg.GeofenceEvent event) async {
+          print('<============== bg.GeofenceEvent: $event ==================>');
+
+          var heartbeat = await sendHeartbeat(
+              event.location.coords.latitude, event.location.coords.longitude);
+          if (heartbeat.withinFence == false) {
+            generateInstantNotification(
+                BienAcaConstants.of(context).alertPageOutOfZoneTitle,
+                BienAcaConstants.of(context).alertPageOutOfZoneTitle);
+          }
+        });
       }
     });
-    initializeLocalNotifications(_onDidReceiveLocalNotification);
   }
 
   @override
@@ -55,87 +65,6 @@ class _InnerPageState extends State<InnerPage> {
               )),
         )),
       )),
-    );
-  }
-
-  void _addHomeGeofence(User user) {
-    bg.BackgroundGeolocation.addGeofence(bg.Geofence(
-      identifier: "Home",
-      radius: 10,
-      latitude: user.lat,
-      longitude: user.lng,
-      notifyOnEntry: true,
-      notifyOnExit: true,
-      notifyOnDwell: true,
-      loiteringDelay: 15000, // 15 secs
-    )).then((bool success) {
-      print('[addGeofence] success');
-    }).catchError((error) {
-      print('[addGeofence] FAILURE: $error');
-    });
-  }
-
-//  void _removeHomeGeofence(User user) {
-//    bg.BackgroundGeolocation.removeGeofence('Home').then((bool success) {
-//      print('[removeGeofence] success');
-//    });
-//  }
-
-  Future<void> _startGeofencing(double distance) async {
-    BuildContext context;
-    bool homeReady = await bg.BackgroundGeolocation.geofenceExists("Home");
-    if (!homeReady) return;
-
-    await bg.BackgroundGeolocation.ready(bg.Config(
-            desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
-            distanceFilter: distance,
-            stopOnTerminate: false,
-            startOnBoot: true,
-            debug: true,
-            heartbeatInterval: 60,
-            preventSuspend: true,
-            logLevel: bg.Config.LOG_LEVEL_VERBOSE))
-        .then((bg.State state) {
-      print("<========= state bgGeolocation: $state ============>");
-
-      if (!state.enabled) {
-        bg.BackgroundGeolocation.start();
-      }
-    });
-
-    bg.BackgroundGeolocation.onGeofence((bg.GeofenceEvent event) async {
-      print('<============== bg.GeofenceEvent: $event ==================>');
-
-      Heartbeat heartbeat = await sendHeartbeat(
-          event.location.coords.latitude, event.location.coords.longitude);
-
-      if (heartbeat.withinFence == false) {
-        generateInstantNotification(
-            BienAcaConstants.of(context).alertPageOutOfZoneTitle,
-            BienAcaConstants.of(context).alertPageOutOfZoneBody);
-        Navigator.pushReplacementNamed(context, '/alertpageoutofzone');
-      }
-    });
-  }
-
-  Future _onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
-    // display a dialog with the notification details, tap ok to go to another page
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(title),
-        content: Text(body),
-        actions: <Widget>[
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            onPressed: () async {
-              print("On pressed");
-            },
-            child: Text('Ok'),
-          )
-        ],
-      ),
     );
   }
 }
