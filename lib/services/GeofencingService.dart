@@ -43,7 +43,7 @@ Future<void> startGeofencing(double distance, {onGeofence = onGeofence}) async {
           geofenceInitialTriggerEntry: true,
           stopOnTerminate: false,
           startOnBoot: true,
-          debug: true,
+          debug: false,
           heartbeatInterval: 60,
           preventSuspend: true,
           logLevel: bg.Config.LOG_LEVEL_VERBOSE))

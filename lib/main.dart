@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:bien_aca_quarantine/components/pages/inner_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
 import 'package:bien_aca_quarantine/components/pages/success_page.dart';
+import 'package:bien_aca_quarantine/components/pages/error_page_registration.dart';
+import 'package:bien_aca_quarantine/components/pages/error_page_not_authenticated.dart';
 import 'package:bien_aca_quarantine/components/pages/alert_page_biometrics.dart';
 import 'package:bien_aca_quarantine/components/pages/alert_page_out_of_zone.dart';
 
@@ -52,6 +54,12 @@ class _MyAppState extends State<MyApp> {
           case 'alertpageoutofzone':
             return MaterialPageRoute(
                 builder: (context) => AlertPageOutOfZone());
+          case 'errorpagenotauthenticated':
+            return MaterialPageRoute(
+              builder: (context) => ErrorPageNotAuthenticated());
+          case 'errorpageregistration':
+            return MaterialPageRoute(
+              builder: (context) => ErrorPage());
           case 'alertpagebiometrics':
             return MaterialPageRoute(
                 builder: (context) => AlertPageBiometrics());

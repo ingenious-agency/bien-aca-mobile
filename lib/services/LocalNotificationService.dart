@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../service_locator.dart';
+import 'NavigationService.dart';
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -24,7 +25,10 @@ void initializeLocalNotifications(onDidReceiveLocalNotification,
       onSelectNotification: onSelectNotification);
 }
 
-Future<void> generateDailyNotification(Time dayTime) async {
+Future<void> generateDailyNotification(int id, hours, minutes, seconds, payload) async {
+  print('<======= daily notification triggered =======>');
+  Time dayTime = Time(hours, minutes, seconds);
+
   AndroidNotificationDetails androidNotificationDetails =
       AndroidNotificationDetails('repeat_daily_at_time', 'Repeat daily at time',
           'Repeats a daily notification several times on a day.',
@@ -41,10 +45,12 @@ Future<void> generateDailyNotification(Time dayTime) async {
       "Prueba de vida",
       "Ingrese a la app para probar que está con su celular.",
       dayTime,
-      notificationDetails);
+      notificationDetails,
+      payload: payload
+  );
 }
 
-void generateInstantNotification(String title, String body) async {
+void generateInstantNotification(String title, String body, String payload) async {
   AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails('instant_alert', 'Instant alert',
           'Instant alert notification to notify the user as soon as possible');
@@ -53,7 +59,7 @@ void generateInstantNotification(String title, String body) async {
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
   try {
     await flutterLocalNotificationsPlugin.show(
-        1, title, body, platformChannelSpecifics);
+        1, title, body, platformChannelSpecifics, payload: payload );
   } catch (e) {
     print(e);
   }
@@ -61,8 +67,17 @@ void generateInstantNotification(String title, String body) async {
 
 Future<void> onSelectNotification(String payload) {
   if (payload != null) {
-    debugPrint('notification payload: ' + payload);
+    print('notification payload: ' + payload);
   }
-  // Here you can set navigations when notification is sent
+  if (payload == 'doBiometrics') {
+    locator<NavigationService>().navigateTo('alertpagebiometrics');
+  }
   return null;
 }
+
+//      id,
+//      "Prueba de vida",
+//      "Ingrese a la app para probar que está con su celular.",
+//      Time(hours, minutes, seconds),
+//      notificationDetails,
+//      payload: "gotoBiometrics");
