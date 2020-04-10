@@ -1,11 +1,7 @@
-import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:bien_aca_quarantine/services/models/Heartbeat.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
 import 'package:bien_aca_quarantine/services/models/User.dart';
-import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
 
 void addHomeGeofence(User user) {
   bg.BackgroundGeolocation.addGeofence(bg.Geofence(
@@ -44,6 +40,7 @@ Future<void> startGeofencing(double distance, {onGeofence = onGeofence}) async {
   await bg.BackgroundGeolocation.ready(bg.Config(
           desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
           distanceFilter: distance,
+          geofenceInitialTriggerEntry: true,
           stopOnTerminate: false,
           startOnBoot: true,
           debug: true,

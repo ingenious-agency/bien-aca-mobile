@@ -8,7 +8,8 @@ AndroidInitializationSettings initializationSettingsAndroid;
 IOSInitializationSettings initializationSettingsIOS;
 InitializationSettings initializationSettings;
 
-void initializeLocalNotifications(onDidReceiveLocalNotification) async {
+void initializeLocalNotifications(onDidReceiveLocalNotification,
+    {onSelectNotification = onSelectNotification}) async {
   initializationSettingsAndroid = AndroidInitializationSettings('icon');
   initializationSettingsIOS = IOSInitializationSettings(
     requestAlertPermission: true,
@@ -25,8 +26,8 @@ void initializeLocalNotifications(onDidReceiveLocalNotification) async {
 
 Future<void> generateDailyNotification(Time dayTime) async {
   AndroidNotificationDetails androidNotificationDetails =
-      AndroidNotificationDetails('repeat_daily_at_time',
-          'Repeat daily at time', 'Repeats a daily notification several times on a day.',
+      AndroidNotificationDetails('repeat_daily_at_time', 'Repeat daily at time',
+          'Repeats a daily notification several times on a day.',
           priority: Priority.High,
           importance: Importance.Max,
           ticker: 'repeatDailyAtTime');
@@ -36,14 +37,17 @@ Future<void> generateDailyNotification(Time dayTime) async {
       NotificationDetails(androidNotificationDetails, iosNotificationDetails);
 
   await flutterLocalNotificationsPlugin.showDailyAtTime(
-      0, "Prueba de vida", "Ingrese a la app para probar que está con su celular.", dayTime, notificationDetails);
+      0,
+      "Prueba de vida",
+      "Ingrese a la app para probar que está con su celular.",
+      dayTime,
+      notificationDetails);
 }
 
 void generateInstantNotification(String title, String body) async {
-  AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'instant_alert',
-      'Instant alert',
-      'Instant alert notification to notify the user as soon as possible');
+  AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails('instant_alert', 'Instant alert',
+          'Instant alert notification to notify the user as soon as possible');
   IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
   NotificationDetails platformChannelSpecifics = NotificationDetails(
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
@@ -54,9 +58,6 @@ void generateInstantNotification(String title, String body) async {
     print(e);
   }
 }
-
-
-
 
 Future<void> onSelectNotification(String payload) {
   if (payload != null) {
