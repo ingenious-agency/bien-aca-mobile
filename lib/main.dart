@@ -4,12 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:bien_aca_quarantine/components/pages/inner_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
 import 'package:bien_aca_quarantine/components/pages/success_page.dart';
-import 'package:bien_aca_quarantine/components/pages/alert_page.dart';
+import 'package:bien_aca_quarantine/components/pages/error_page_registration.dart';
+import 'package:bien_aca_quarantine/components/pages/alert_page_biometrics.dart';
+import 'package:bien_aca_quarantine/components/pages/alert_page_out_of_zone.dart';
+
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:bien_aca_quarantine/services/UserService.dart';
 import 'package:bien_aca_quarantine/services/GeofencingService.dart';
 import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
+
 
 void main() {
   runApp(BienAcaConstants(
@@ -48,7 +52,9 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/innerpage': (context) => InnerPage(),
         '/successpage': (context) => SuccessPage(),
-        '/alertpage': (context) => AlertPage(),
+        '/errorpageregistration': (context) => ErrorPage(),
+        '/alertpageoutofzone': (context) => AlertPageOutOfZone(),
+        '/alertpagebiometrics': (context) => AlertPageBiometrics(),
       },
       title: BienAcaConstants.of(context).mainTitle,
       theme: ThemeData(

@@ -4,7 +4,7 @@ import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 
-class AlertPage extends StatelessWidget {
+class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double cWidth = MediaQuery
@@ -31,7 +31,7 @@ class AlertPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(BienAcaConstants.of(context).alertPageBodyTitleOutGeofence,
+                      Text(BienAcaConstants.of(context).errorPageBodyTitle,
                           style: TextStyle(
                               fontSize: 28.0,
                               fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class AlertPage extends StatelessWidget {
                               color: Colors.white)),
                       Container(
                         width: cWidth,
-                        child: Text(BienAcaConstants.of(context).alertPageBodyBodyOutGeofence,
+                        child: Text(BienAcaConstants.of(context).errorPagePageBody,
                             style:
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                       ),
@@ -49,14 +49,6 @@ class AlertPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20.0),
-//              FloatingActionButton(
-//                onPressed: () {
-//                  Navigator.pop(context);
-//                },
-//                elevation: 0.0,
-//                backgroundColor: BienAcaConstants.of(context).pink,
-//                child: Text("Ok"),
-//              )
             ],
           ),
         )));

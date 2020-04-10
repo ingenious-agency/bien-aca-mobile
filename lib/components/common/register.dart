@@ -216,7 +216,7 @@ class RegisterState extends State<Register> {
                         //     backgroundColor: Colors.red,
                         //     content: Text(
                         //         'Opss... Something went wrong registering the user')));
-                        Navigator.pushNamed(context, '/alertpage');
+                        Navigator.pushNamed(context, '/errorpageregistration');
                       }
                     }
                   },

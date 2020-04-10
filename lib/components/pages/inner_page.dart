@@ -111,9 +111,9 @@ class _InnerPageState extends State<InnerPage> {
 
       if (heartbeat.withinFence == false) {
         generateInstantNotification(
-            BienAcaConstants.of(context).alertPageBodyTitleOutGeofence,
-            BienAcaConstants.of(context).alertPageBodyBodyOutGeofence);
-        Navigator.pushReplacementNamed(context, '/alertpage');
+            BienAcaConstants.of(context).alertPageOutOfZoneTitle,
+            BienAcaConstants.of(context).alertPageOutOfZoneBody);
+        Navigator.pushReplacementNamed(context, '/alertpageoutofzone');
       }
     });
   }

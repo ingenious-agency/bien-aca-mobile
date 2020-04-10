@@ -43,8 +43,10 @@ class BienAcaConstants extends InheritedWidget {
   final String innerpageTitle = '¡Estás en cuarentena!';
   final String innerpageBody1 = 'En caso de salir de tu zona o no cumplir con las pruebas biométicas, un preaviso te notificará.';
   final String innerpageBody2 = 'Si en el lapso de 10 minutos no corregís la situación, una alerta será enviada al centro de control y esta aplicación quedará bloqueada.';
-  final String alertPageBodyTitleOutGeofence = 'Saliste de la zona';
-  final String alertPageBodyBodyOutGeofence = 'Una alarma ha sido enviada al centro de control';
+  final String alertPageOutOfZoneTitle = 'Saliste de la zona';
+  final String alertPageOutOfZoneBody = 'Una alarma ha sido enviada al centro de control';
+  final String errorPageBodyTitle = 'Hubo un error con tu registro';
+  final String errorPagePageBody = 'Por favor, revisá la información enviada y volvé a intentarlo. Muchas gracias!';
 
   @override
   bool updateShouldNotify(BienAcaConstants oldWidget) => false;
