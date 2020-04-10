@@ -1,6 +1,6 @@
 import 'package:local_auth/local_auth.dart';
 
-Future<void> authenticateFingerprint() async {
+Future<bool> authenticateFingerprint() async {
     LocalAuthentication localAuth = LocalAuthentication();
     
     bool authenticated = false;
@@ -12,6 +12,7 @@ Future<void> authenticateFingerprint() async {
           stickyAuth: false);
     } on Error catch (e) {
       print(e);
+      return false;
     }
     return authenticated;
   }

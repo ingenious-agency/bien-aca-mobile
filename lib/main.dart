@@ -5,6 +5,7 @@ import 'package:bien_aca_quarantine/components/pages/inner_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
 import 'package:bien_aca_quarantine/components/pages/success_page.dart';
 import 'package:bien_aca_quarantine/components/pages/error_page_registration.dart';
+import 'package:bien_aca_quarantine/components/pages/error_page_not_authenticated.dart';
 import 'package:bien_aca_quarantine/components/pages/alert_page_biometrics.dart';
 import 'package:bien_aca_quarantine/components/pages/alert_page_out_of_zone.dart';
 
@@ -27,10 +28,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/';
+  String initialRoute = '/alertpagebiometrics';
   bool goToInnerPage = false;
 
   Future<void> onSelectNotification(String payload) {
+    print(payload);
     if (payload != null) {}
   }
 
@@ -58,7 +60,7 @@ class _MyAppState extends State<MyApp> {
     getCurrentUser().then((user) async {
       if (await hasCurrentUser()) {
         setState(() {
-          initialRoute = '/innerpage';
+          initialRoute = '/alertpagebiometrics';
           goToInnerPage = true;
         });
       }
@@ -73,6 +75,7 @@ class _MyAppState extends State<MyApp> {
         '/innerpage': (context) => InnerPage(),
         '/successpage': (context) => SuccessPage(),
         '/errorpageregistration': (context) => ErrorPage(),
+        '/errorpagenotauthenticated': (context) => ErrorPageNotAuthenticated(),
         '/alertpageoutofzone': (context) => AlertPageOutOfZone(),
         '/biometrics': (context) => AlertPageOutOfZone(),
         '/alertpagebiometrics': (context) => AlertPageBiometrics(),

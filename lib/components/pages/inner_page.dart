@@ -24,6 +24,7 @@ class _InnerPageState extends State<InnerPage> {
     getCurrentUser().then((user) async {
       if (await hasCurrentUser()) {
         addHomeGeofence(user);
+        generateDailyNotification(0, 13, 18, 0);
         await startGeofencing(10.0, onGeofence: (bg.GeofenceEvent event) async {
           print('<============== bg.GeofenceEvent: $event ==================>');
 

@@ -1,3 +1,5 @@
+import 'package:bien_aca_quarantine/services/BiometricAuthService.dart';
+import 'package:bien_aca_quarantine/services/models/AuthenticationProof.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
@@ -31,7 +33,7 @@ class AlertPageBiometrics extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(BienAcaConstants.of(context).alertPageOutOfZoneTitle,
+                      Text(BienAcaConstants.of(context).alertBiometricsTitle,
                           style: TextStyle(
                               fontSize: 28.0,
                               fontWeight: FontWeight.bold,
@@ -39,7 +41,7 @@ class AlertPageBiometrics extends StatelessWidget {
                               color: Colors.white)),
                       Container(
                         width: cWidth,
-                        child: Text(BienAcaConstants.of(context).alertPageOutOfZoneBody,
+                        child: Text(BienAcaConstants.of(context).alertBiometricsBody,
                             style:
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                       ),
@@ -50,8 +52,14 @@ class AlertPageBiometrics extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
               FloatingActionButton(
-                onPressed: () {
-                  Navigator.pop(context);
+                onPressed: () async {
+                  bool authenticated = await authenticateFingerprint();
+                  if(authenticated) {
+                    sendProof(authenticated);
+                    Navigator.pushReplacementNamed(context, '/innerpage');
+                  };
+                  sendProof(authenticated);
+                  Navigator.pushReplacementNamed(context, '/errorpagenotauthenticated');
                 },
                 elevation: 0.0,
                 backgroundColor: BienAcaConstants.of(context).pink,

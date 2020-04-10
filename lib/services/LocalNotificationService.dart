@@ -23,7 +23,8 @@ void initializeLocalNotifications(onDidReceiveLocalNotification, onSelectNotific
 }
 
 Future<void> generateDailyNotification(int id, hours, minutes, seconds) async {
-  var dayTime = Time(11, 40, 0);
+  print('<======= daily notification triggered =======>');
+  var dayTime = Time(hours, minutes, seconds);
 
   AndroidNotificationDetails androidNotificationDetails =
       AndroidNotificationDetails('repeat_daily_at_time', 'Repeat daily at time',
@@ -37,7 +38,7 @@ Future<void> generateDailyNotification(int id, hours, minutes, seconds) async {
       NotificationDetails(androidNotificationDetails, iosNotificationDetails);
 
   await flutterLocalNotificationsPlugin.showDailyAtTime(
-      0, "Prueba de vida", "Ingrese a la app para probar que está con su celular.", dayTime, notificationDetails);
+      id, "Prueba de vida", "Ingrese a la app para probar que está con su celular.", dayTime, notificationDetails);
 }
 
 void generateInstantNotification(String title, String body) async {

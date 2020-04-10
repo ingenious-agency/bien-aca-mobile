@@ -31,7 +31,7 @@ class ErrorPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(BienAcaConstants.of(context).errorPageBodyTitle,
+                      Text(BienAcaConstants.of(context).errorPageTitle,
                           style: TextStyle(
                               fontSize: 28.0,
                               fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class ErrorPage extends StatelessWidget {
                               color: Colors.white)),
                       Container(
                         width: cWidth,
-                        child: Text(BienAcaConstants.of(context).errorPagePageBody,
+                        child: Text(BienAcaConstants.of(context).errorPageBody,
                             style:
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                       ),

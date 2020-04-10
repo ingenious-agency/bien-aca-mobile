@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,61 +8,45 @@ import 'package:bien_aca_quarantine/services/models/User.dart';
 
 final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
-Future<Heartbeat> sendHeartbeat(lat, lng) async {
+Future<AuthenticationProof> sendProof(authenticated) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   User user = User.fromJson(jsonDecode(prefs.getString("user")));
   if (user == null) return Future.value(null);
 
-  Heartbeat heartbeat = Heartbeat(
+  AuthenticationProof authenticationProof = AuthenticationProof(
       userId: user.id,
-      time: DateTime.now().toIso8601String(),
-      lat: lat,
-      lng: lng);
+      time: DateTime.now(),
+      authenticated: authenticated
+  );
 
-  final jsonHeartbeat = jsonEncode(heartbeat);
-
-  final response = await http.post('$serverUrl/users/${user.id}/heartbeats',
-      headers: {"Content-Type": "application/json"}, body: jsonHeartbeat);
-
-  if (response.statusCode == 201) {
-    Heartbeat heartbeat =
-        Heartbeat.fromJson(json.decode(response.body)["heartbeat"]);
-    return Future.value(heartbeat);
-  } else {
-    throw Exception('Failed to send the heartbeat');
-  }
+//  final jsonAuthenticationProof = jsonEncode(authenticationProof);
+//
+//  final response = await http.post('$serverUrl/users/${user.id}/authentication_proofs',
+//      headers: {"Content-Type": "application/json"}, body: jsonAuthenticationProof);
+//
+//  if (response.statusCode == 201) {
+    return Future.value(authenticationProof);
+//  } else {
+//    throw Exception('Failed to send the authentication proof');
+//  }
 }
 
-class Heartbeat {
+class AuthenticationProof {
   final int id;
   final int userId;
-  final String time;
-  final double lat;
-  final double lng;
-  final bool withinFence;
+  final DateTime time;
+  final bool authenticated;
 
-  Heartbeat(
-      {this.id, this.userId, this.time, this.lat, this.lng, this.withinFence});
-
-  factory Heartbeat.fromJson(Map<String, dynamic> json) {
-    return Heartbeat(
-      id: json['id'],
-      userId: json['user_id'],
-      time: json['time'],
-      lat: double.parse(json['lat']),
-      lng: double.parse(json['lng']),
-      withinFence: json['within_fence'],
-    );
-  }
+  AuthenticationProof(
+      {this.id, this.userId, this.time, this.authenticated});
 
   Map<String, dynamic> toJson() {
     return {
-      'heartbeat': {
+      'authentication_proof': {
         'id': id,
-        'time': time,
-        'lat': lat,
-        'lng': lng,
+        'time': time.toIso8601String(),
+        'authenticated': authenticated.toString()
       }
     };
   }
