@@ -30,13 +30,12 @@ class _MyAppState extends State<MyApp> {
   String initialRoute = '/';
   bool goToInnerPage = false;
 
-
   Future<void> onSelectNotification(String payload) {
     if (payload != null) {}
   }
 
-  Future onDidReceiveLocalNotification(int id, String title, String body,
-      String payload) async {
+  Future onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
     return CupertinoAlertDialog(
       title: Text(title),
       content: Text(body),
@@ -51,7 +50,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -65,61 +63,54 @@ class _MyAppState extends State<MyApp> {
         });
       }
     });
-
-
-    @override
-    Widget build(BuildContext context) {
-      return MaterialApp(
-        initialRoute: initialRoute,
-        routes: {
-      '/innerpage': (context) => InnerPage(),
-      '/successpage': (context) => SuccessPage(),
-      '/errorpageregistration': (context) => ErrorPage(),
-      '/alertpageoutofzone': (context) => AlertPageOutOfZone(),
-      '/biometrics': (context) => AlertPageOutOfZone(),
-      '/alertpagebiometrics': (context) => AlertPageBiometrics(),
-      },
-        title: BienAcaConstants
-            .of(context)
-            .mainTitle,
-        theme: ThemeData(
-            fontFamily: 'OpenSans',
-            textTheme: TextTheme(
-              headline: TextStyle(
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'RobotoSlab',
-                  color: BienAcaConstants
-                      .of(context)
-                      .blue),
-              body1: TextStyle(
-                  fontSize: 16.0, color: BienAcaConstants
-                  .of(context)
-                  .blue),
-            )),
-        home: goToInnerPage ? InnerPage() : HomePage(),
-      );
-    }
-
-    Future _onDidReceiveLocalNotification(int id, String title, String body,
-        String payload) async {
-      // display a dialog with the notification details, tap ok to go to another page
-      showDialog(
-        context: context,
-        builder: (BuildContext context) =>
-            CupertinoAlertDialog(
-              title: Text(title),
-              content: Text(body),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  onPressed: () async {
-                    print("On pressed");
-                  },
-                  child: Text('Ok'),
-                )
-              ],
-            ),
-      );
-    }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: initialRoute,
+      routes: {
+        '/innerpage': (context) => InnerPage(),
+        '/successpage': (context) => SuccessPage(),
+        '/errorpageregistration': (context) => ErrorPage(),
+        '/alertpageoutofzone': (context) => AlertPageOutOfZone(),
+        '/biometrics': (context) => AlertPageOutOfZone(),
+        '/alertpagebiometrics': (context) => AlertPageBiometrics(),
+      },
+      title: BienAcaConstants.of(context).mainTitle,
+      theme: ThemeData(
+          fontFamily: 'OpenSans',
+          textTheme: TextTheme(
+            headline: TextStyle(
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'RobotoSlab',
+                color: BienAcaConstants.of(context).blue),
+            body1: TextStyle(
+                fontSize: 16.0, color: BienAcaConstants.of(context).blue),
+          )),
+      home: goToInnerPage ? InnerPage() : HomePage(),
+    );
+  }
+
+  Future _onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
+    // display a dialog with the notification details, tap ok to go to another page
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(body),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () async {
+              print("On pressed");
+            },
+            child: Text('Ok'),
+          )
+        ],
+      ),
+    );
+  }
+}
