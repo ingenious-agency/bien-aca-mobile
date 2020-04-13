@@ -53,13 +53,13 @@ Creemos en **BienAcá** como una solución integral, de implementación rápida 
 **Luego de la crisis sanitaria puede ser utilizada para medidas cautelares de bajo riesgo** como la prohibición de asistir determinadas reuniones, recintos o espectáculos públicos, o de visitar determinados lugares o de aproximarse a ciertas personas.
 
 ## Screens :tv:
-![splash-screen](images/splash-screen.png)
-![registration-screen](images/register.png)
-![success-screen](images/success-screen.png)
-![inner-page-screen](images/inner-page.png)
-![alert-page-biometrics](images/alert-page-biometrics.png)
-![alert-page-not-authenticated](images/alert-page-not-authenticated.png)
-![alert-page-out-of-zone](images/alert-page-out-of-zone.png)
+![splash-screen](images/splash-screen.jpg)
+![registration-screen](images/register.jpg)
+![success-screen](images/success-screen.jpg)
+![inner-page-screen](images/inner-page.jpg)
+![alert-page-biometrics](images/alert-page-biometrics.jpg)
+![alert-page-not-authenticated](images/alert-page-not-authenticated.jpg)
+![alert-page-out-of-zone](images/alert-page-out-of-zone.jpg)
 
 # Actuemos juntos!
 [<img src="images/footer.png">](https://www.ingsw.com/)
