@@ -60,6 +60,9 @@ Creemos en **BienAcá** como una solución integral, de implementación rápida 
 ![alert-page-biometrics](images/alert-page-biometrics.jpg)
 ![alert-page-not-authenticated](images/alert-page-not-authenticated.jpg)
 ![alert-page-out-of-zone](images/alert-page-out-of-zone.jpg)
+![notification-do-biometrics](images/notification-do-biometrics.jpg)
+![notification-alarm-sent](images/notification-alarm-sent.jpg)
+
 
 # Actuemos juntos!
 [<img src="images/footer.png">](https://www.ingsw.com/)
