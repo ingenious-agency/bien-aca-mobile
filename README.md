@@ -31,9 +31,13 @@ Nuestra solución utiliza el análisis biométrico para certificar y asegurar qu
 - Sistema de Heartbeat
 - Interface para admins
 
-### Qué faltaría implementar
+### Qué faltaría implementar Mobile
 - Preaviso al usuario
 - Randomización de prueba biométrica
+
+### Qué faltaría implementar Backend
+- Mandar emails de notificaciones
+
 
 ## Control y calma en tiempos de crisis 😌
 Creemos en **BienAcá** como una solución integral, de implementación rápida pero ampliamente flexible a las necesidades de un contexto en crisis. Fue diseñada para proveer tranquilidad y acierto en momentos extremos. Pensada para cuidar tiempo y dinero; creada para actuar hoy y estar tranquilos mañana.
@@ -48,6 +52,14 @@ Creemos en **BienAcá** como una solución integral, de implementación rápida 
 
 **Luego de la crisis sanitaria puede ser utilizada para medidas cautelares de bajo riesgo** como la prohibición de asistir determinadas reuniones, recintos o espectáculos públicos, o de visitar determinados lugares o de aproximarse a ciertas personas.
 
-# Actuemos juntos!
-![](images/footer.png)
+## Screens :tv:
+![splash-screen](images/splash-screen.png)
+![registration-screen](images/register.png)
+![success-screen](images/success-screen.png)
+![inner-page-screen](images/inner-page.png)
+![alert-page-biometrics](images/alert-page-biometrics.png)
+![alert-page-not-authenticated](images/alert-page-not-authenticated.png)
+![alert-page-out-of-zone](images/alert-page-out-of-zone.png)
 
+# Actuemos juntos!
+[<img src="images/footer.png">](https://www.ingsw.com/)
