@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bien_aca_quarantine/service_locator.dart';
 import 'package:bien_aca_quarantine/services/GeofencingService.dart';
 import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
@@ -29,9 +31,12 @@ class _HomePageState extends State<HomePage> {
     getCurrentUser().then((user) async {
       if (await hasCurrentUser()) {
         locator<NavigationService>().navigateTo('innerpage');
-        generateDailyNotification(0, 10, 01, 0, 'doBiometrics');
-        generateDailyNotification(0, 16, 02, 0, 'doBiometrics');
-        generateDailyNotification(0, 21, 07, 0, 'doBiometrics');
+        /// Between 9:00 and 12:00
+        generateDailyNotification(0, 9 + Random().nextInt(12 - 9), 00, 00, 'doBiometrics-0');
+        /// Between 14:00 and 16:00
+        generateDailyNotification(1, 14 + Random().nextInt(16 - 14), 00, 00, 'doBiometrics-1');
+        /// Between 18:00 and 20:00
+        generateDailyNotification(2, 18 + Random().nextInt(20 - 18), 00, 00, 'doBiometrics-2');
         addHomeGeofence(user);
         await startGeofencing(150.0,
             onGeofence: (bg.GeofenceEvent event) async {
@@ -53,8 +58,9 @@ class _HomePageState extends State<HomePage> {
     });
     initializeLocalNotifications(_onDidReceiveLocalNotification,
         onSelectNotification: (String payload) {
-      if (payload == 'doBiometrics') {
-        locator<NavigationService>().navigateTo('alertpagebiometrics');
+      if (payload.split("-")[0] == 'doBiometrics') {
+        locator<NavigationService>()
+            .navigateTo('alertpagebiometrics', payload.split("-")[1]);
       }
       if (payload == 'alertOutOfZone') {
         locator<NavigationService>().navigateTo('alertpageoutofzone');

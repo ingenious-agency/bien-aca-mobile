@@ -27,6 +27,7 @@ void initializeLocalNotifications(onDidReceiveLocalNotification,
 
 Future<void> generateDailyNotification(
     int id, hours, minutes, seconds, payload) async {
+  /// IMPORTANT: First 3 ids [0, 1, 2] are RESERVED for DAILY notifications
   print('<======= daily notification triggered =======>');
   Time dayTime = Time(hours, minutes, seconds);
 
@@ -42,12 +43,18 @@ Future<void> generateDailyNotification(
       NotificationDetails(androidNotificationDetails, iosNotificationDetails);
 
   await flutterLocalNotificationsPlugin.showDailyAtTime(
-      0,
+      id,
       "Prueba de vida",
       "Ingrese a la app para probar que está con su celular.",
       dayTime,
       notificationDetails,
       payload: payload);
+}
+
+Future<void> resetDailyNotificationTime(
+    int id, hours, minutes, seconds, payload) async {
+  await flutterLocalNotificationsPlugin.cancel(id);
+  await generateDailyNotification(id, hours, minutes, seconds, payload);
 }
 
 void generateInstantNotification(
@@ -70,8 +77,9 @@ Future<void> onSelectNotification(String payload) {
   if (payload != null) {
     print('notification payload: ' + payload);
   }
-  if (payload == 'doBiometrics') {
-    locator<NavigationService>().navigateTo('alertpagebiometrics');
+  if (payload.split("-")[0] == 'doBiometrics') {
+    locator<NavigationService>()
+        .navigateTo('alertpagebiometrics', payload.split("-")[1]);
   }
   return null;
 }
