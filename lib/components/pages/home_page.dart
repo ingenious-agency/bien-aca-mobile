@@ -31,12 +31,19 @@ class _HomePageState extends State<HomePage> {
     getCurrentUser().then((user) async {
       if (await hasCurrentUser()) {
         locator<NavigationService>().navigateTo('innerpage');
+
         /// Between 9:00 and 12:00
-        generateDailyNotification(0, 9 + Random().nextInt(12 - 9), 00, 00, 'doBiometrics-0');
+        generateDailyNotification(
+            0, 9 + Random().nextInt(12 - 9), 00, 00, 'doBiometrics-0');
+
         /// Between 14:00 and 16:00
-        generateDailyNotification(1, 14 + Random().nextInt(16 - 14), 00, 00, 'doBiometrics-1');
+        generateDailyNotification(
+            1, 14 + Random().nextInt(16 - 14), 00, 00, 'doBiometrics-1');
+
         /// Between 18:00 and 20:00
-        generateDailyNotification(2, 18 + Random().nextInt(20 - 18), 00, 00, 'doBiometrics-2');
+        generateDailyNotification(
+            2, 18 + Random().nextInt(20 - 18), 00, 00, 'doBiometrics-2');
+
         addHomeGeofence(user);
         await startGeofencing(150.0,
             onGeofence: (bg.GeofenceEvent event) async {
@@ -46,6 +53,7 @@ class _HomePageState extends State<HomePage> {
               event.location.coords.latitude, event.location.coords.longitude);
           if (heartbeat.withinFence == false) {
             generateInstantNotification(
+                3,
                 'Saliste de la zona',
                 'Una alarma ha sido enviada al centro de control.',
                 'alertOutOfZone');

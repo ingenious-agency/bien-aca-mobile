@@ -58,7 +58,7 @@ Future<void> resetDailyNotificationTime(
 }
 
 void generateInstantNotification(
-    String title, String body, String payload) async {
+    int id, String title, String body, String payload) async {
   AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails('instant_alert', 'Instant alert',
           'Instant alert notification to notify the user as soon as possible');
@@ -67,7 +67,7 @@ void generateInstantNotification(
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
   try {
     await flutterLocalNotificationsPlugin
-        .show(1, title, body, platformChannelSpecifics, payload: payload);
+        .show(id, title, body, platformChannelSpecifics, payload: payload);
   } catch (e) {
     print(e);
   }
