@@ -77,7 +77,7 @@ Future<void> onSelectNotification(String payload) {
   if (payload != null) {
     print('notification payload: ' + payload);
   }
-  if (payload.split("-")[0] == 'doBiometrics') {
+  if (payload.startsWith("doBiometrics")) {
     locator<NavigationService>()
         .navigateTo('alertpagebiometrics', payload.split("-")[1]);
   }

@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     });
     initializeLocalNotifications(_onDidReceiveLocalNotification,
         onSelectNotification: (String payload) {
-      if (payload.split("-")[0] == 'doBiometrics') {
+      if (payload.startsWith("doBiometrics")) {
         locator<NavigationService>()
             .navigateTo('alertpagebiometrics', payload.split("-")[1]);
       }

@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bien_aca_quarantine/services/GeofencingService.dart';
 
 enum Gender { MALE, FEMALE }
-final serverUrl = 'http://10.0.2.2:3000';
 
+final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
 Future<bool> registerUser(
     Map<String, dynamic> userData, double lat, double lng) async {

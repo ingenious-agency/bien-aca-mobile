@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bien_aca_quarantine/services/models/User.dart';
 
-final serverUrl = 'http://10.0.2.2:3000';
+final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
 Future<AuthenticationProof> sendProof(authenticated) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
