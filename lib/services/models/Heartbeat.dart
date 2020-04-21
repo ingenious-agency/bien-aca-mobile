@@ -7,7 +7,7 @@ import 'package:bien_aca_quarantine/services/models/User.dart';
 
 final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
-Future<Heartbeat> sendHeartbeat(lat, lng, {data} async {
+Future<Heartbeat> sendHeartbeat(lat, lng, {data}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   User user = User.fromJson(jsonDecode(prefs.getString("user")));
