@@ -9,6 +9,10 @@ import 'package:bien_aca_quarantine/components/layouts/design_layout.dart';
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 
 class AlertPageBiometrics extends StatelessWidget {
+  AlertPageBiometrics({Key key, this.notificationId}) : super(key: key);
+  
+  final int notificationId;
+
   @override
   Widget build(BuildContext context) {
     double cWidth = MediaQuery.of(context).size.width * 0.7;
@@ -53,7 +57,7 @@ class AlertPageBiometrics extends StatelessWidget {
               SizedBox(height: 20.0),
               FloatingActionButton(
                 onPressed: () async {
-                  bool authenticated = await authenticateFingerprint();
+                  bool authenticated = await authenticateFingerprint(notificationId);
                   sendProof(authenticated);
                   if (authenticated) {
                     locator<NavigationService>().navigateTo('innerpage');

@@ -60,8 +60,9 @@ class _MyAppState extends State<MyApp> {
           case 'errorpageregistration':
             return MaterialPageRoute(builder: (context) => ErrorPage());
           case 'alertpagebiometrics':
+            final AlertPageBiometricsArguments args = routeSettings.arguments;
             return MaterialPageRoute(
-                builder: (context) => AlertPageBiometrics());
+                builder: (context) => AlertPageBiometrics(notificationId: args.notificationId));
           default:
             return MaterialPageRoute(builder: (context) => HomePage());
         }
