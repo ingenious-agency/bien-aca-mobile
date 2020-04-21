@@ -61,7 +61,7 @@ Future<void> startGeofencing(double distance, {onGeofence = onGeofence}) async {
     try {
       await sendHeartbeat(
           event.location.coords.latitude, event.location.coords.longitude,
-          isAliveHeartbeat: true);
+          data: {'isAliveHeartbeat': true});
     } catch (e) {}
   });
 }
