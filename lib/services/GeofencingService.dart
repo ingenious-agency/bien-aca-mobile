@@ -44,7 +44,7 @@ Future<void> startGeofencing(double distance, {onGeofence = onGeofence}) async {
           stopOnTerminate: false,
           startOnBoot: true,
           debug: false,
-          heartbeatInterval: 60,
+          heartbeatInterval: 1800, // Half an hour
           preventSuspend: true,
           logLevel: bg.Config.LOG_LEVEL_VERBOSE))
       .then((bg.State state) {
@@ -56,4 +56,12 @@ Future<void> startGeofencing(double distance, {onGeofence = onGeofence}) async {
   });
 
   bg.BackgroundGeolocation.onGeofence(onGeofence);
+
+  bg.BackgroundGeolocation.onHeartbeat((bg.HeartbeatEvent event) async {
+    try {
+      await sendHeartbeat(
+          event.location.coords.latitude, event.location.coords.longitude,
+          data: {'isAliveHeartbeat': true});
+    } catch (e) {}
+  });
 }
