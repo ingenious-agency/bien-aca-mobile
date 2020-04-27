@@ -2,10 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:bien_aca_quarantine/services/models/User.dart';
-
-final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
 Future<AuthenticationProof> sendProof(authenticated) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -19,7 +18,7 @@ Future<AuthenticationProof> sendProof(authenticated) async {
   final jsonAuthenticationProof = jsonEncode(authenticationProof);
 
   final response = await http.post(
-      '$serverUrl/users/${user.id}/authentication_proofs',
+      '${DotEnv().env['SERVER_URL']}/users/${user.id}/authentication_proofs',
       headers: {"Content-Type": "application/json"},
       body: jsonAuthenticationProof);
 

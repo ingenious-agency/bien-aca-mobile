@@ -2,10 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:bien_aca_quarantine/services/models/User.dart';
-
-final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
 Future<Heartbeat> sendHeartbeat(lat, lng, {data}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -22,7 +21,7 @@ Future<Heartbeat> sendHeartbeat(lat, lng, {data}) async {
 
   final jsonHeartbeat = jsonEncode(heartbeat);
 
-  final response = await http.post('$serverUrl/users/${user.id}/heartbeats',
+  final response = await http.post('${DotEnv().env['SERVER_URL']}/users/${user.id}/heartbeats',
       headers: {"Content-Type": "application/json"}, body: jsonHeartbeat);
 
   if (response.statusCode == 201) {

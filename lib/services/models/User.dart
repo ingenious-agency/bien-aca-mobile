@@ -2,12 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:bien_aca_quarantine/services/GeofencingService.dart';
 
 enum Gender { MALE, FEMALE }
-
-final serverUrl = 'https://bian-aca-prod.herokuapp.com';
 
 Future<bool> registerUser(
     Map<String, dynamic> userData, double lat, double lng) async {
@@ -25,7 +24,7 @@ Future<bool> registerUser(
 
   final jsonUser = jsonEncode(user);
 
-  final response = await http.post('$serverUrl/users',
+  final response = await http.post('${DotEnv().env['SERVER_URL']}/users',
       headers: {"Content-Type": "application/json"}, body: jsonUser);
 
   if (response.statusCode != 201) return false;
