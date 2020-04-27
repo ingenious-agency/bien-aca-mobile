@@ -1,5 +1,6 @@
 import 'package:bien_aca_quarantine/service_locator.dart';
 import 'package:bien_aca_quarantine/services/BiometricAuthService.dart';
+import 'package:bien_aca_quarantine/services/LocalNotificationService.dart';
 import 'package:bien_aca_quarantine/services/NavigationService.dart';
 import 'package:bien_aca_quarantine/services/models/AuthenticationProof.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 class AlertPageBiometrics extends StatelessWidget {
   AlertPageBiometrics({Key key, this.notificationId}) : super(key: key);
   
-  final int notificationId;
+  final LocalNotificationIds notificationId;
 
   @override
   Widget build(BuildContext context) {
