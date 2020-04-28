@@ -18,7 +18,6 @@ enum LocalNotificationIds {
   lostHeartbeatScheduled,
   lostConnectivityInstant,
   lostGpsInstant,
-  testSchedule
 }
 
 void initializeLocalNotifications(onDidReceiveLocalNotification,
