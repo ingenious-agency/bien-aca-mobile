@@ -1,6 +1,8 @@
-import 'package:bien_aca_quarantine/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:bien_aca_quarantine/service_locator.dart';
 
 import 'package:bien_aca_quarantine/components/pages/inner_page.dart';
 import 'package:bien_aca_quarantine/components/pages/home_page.dart';
@@ -13,8 +15,9 @@ import 'package:bien_aca_quarantine/components/pages/alert_page_out_of_zone.dart
 import 'package:bien_aca_quarantine/constants/BienAcaConstants.dart';
 import 'package:bien_aca_quarantine/services/NavigationService.dart';
 
-void main() {
+void main() async {
   setupLocator();
+  await DotEnv().load('.env');
   runApp(BienAcaConstants(
     child: MyApp(),
   ));
