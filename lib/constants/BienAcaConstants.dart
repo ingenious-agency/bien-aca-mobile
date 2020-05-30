@@ -7,7 +7,7 @@ class BienAcaConstants extends InheritedWidget {
   BienAcaConstants({Widget child, Key key})
       : super(key: key, child: child);
 
-  /// Colors
+  // Colors
   final Color blue = Color(0xFF475985);
   final Color lightBlue = Color(0xFFCDE2DD);
   final Color pink = Color(0xFFC27472);
@@ -15,9 +15,10 @@ class BienAcaConstants extends InheritedWidget {
   final Color orange = Color(0xFFFFD000);
   final Color green = Color(0xFF9DE2D2);
 
-  /// Texts
-  /// To define a text constant do it following:
-  /// final String screennameCapitalisedVarName = "value"
+  // Texts
+  // To define a text constant do it following:
+  // final String screennameCapitalisedVarName = "value"
+  
   // main.dart
   final String mainTitle = 'BienAcá - Quarent';
   // register.dart

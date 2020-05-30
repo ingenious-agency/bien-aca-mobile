@@ -9,6 +9,21 @@ AndroidInitializationSettings initializationSettingsAndroid;
 IOSInitializationSettings initializationSettingsIOS;
 InitializationSettings initializationSettings;
 
+/// Notification IDs stored in an enum - access the value using `.index` accessor within enum elements
+enum LocalNotificationIds {
+  morningDaily,
+  middayDaily,
+  afternoonDaily,
+  outOfZoneInstant,
+  lostHeartbeatScheduled,
+  lostConnectivityInstant,
+  lostGpsInstant,
+}
+
+dynamic getLocalNotificationIdFromPayload(payload) =>
+    LocalNotificationIds.values
+        .firstWhere((e) => e.toString() == payload.split("-")[1]);
+
 void initializeLocalNotifications(onDidReceiveLocalNotification,
     {onSelectNotification = onSelectNotification}) async {
   initializationSettingsAndroid = AndroidInitializationSettings('icon');
@@ -26,8 +41,7 @@ void initializeLocalNotifications(onDidReceiveLocalNotification,
 }
 
 Future<void> generateDailyNotification(
-    int id, hours, minutes, seconds, payload) async {
-  /// IMPORTANT: First 3 ids [0, 1, 2] are RESERVED for DAILY notifications
+    LocalNotificationIds localNotificationId, hours, minutes, seconds) async {
   print('<======= daily notification triggered =======>');
   Time dayTime = Time(hours, minutes, seconds);
 
@@ -43,50 +57,69 @@ Future<void> generateDailyNotification(
       NotificationDetails(androidNotificationDetails, iosNotificationDetails);
 
   await flutterLocalNotificationsPlugin.showDailyAtTime(
-      id,
+      localNotificationId.index,
       "Prueba de vida",
       "Ingrese a la app para probar que está con su celular.",
       dayTime,
       notificationDetails,
-      payload: payload);
+      payload: "doBiometrics-$localNotificationId");
 }
 
-Future<void> resetDailyNotificationTime(
-    int id, hours, minutes, seconds, payload) async {
-  await flutterLocalNotificationsPlugin.cancel(id);
-  await generateDailyNotification(id, hours, minutes, seconds, payload);
-}
-
-void generateInstantNotification(
-    int id, String title, String body, String payload) async {
+void generateInstantNotification(LocalNotificationIds localNotificationId,
+    String title, String body, String payload) async {
   AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails('instant_alert', 'Instant alert',
           'Instant alert notification to notify the user as soon as possible');
   IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
+
   NotificationDetails platformChannelSpecifics = NotificationDetails(
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
   try {
-    await flutterLocalNotificationsPlugin
-        .show(id, title, body, platformChannelSpecifics, payload: payload);
+    await flutterLocalNotificationsPlugin.show(
+        localNotificationId.index, title, body, platformChannelSpecifics,
+        payload: payload);
   } catch (e) {
     print(e);
   }
 }
 
-Future<void> onSelectNotification(String payload) {
-  if (payload != null) {
-    print('notification payload: ' + payload);
-  }
-  if (payload.startsWith("doBiometrics")) {
-    locator<NavigationService>()
-        .navigateTo('alertpagebiometrics', payload.split("-")[1]);
-  }
-  return null;
+Future<void> generateScheduledNotification(
+    LocalNotificationIds localNotificationId,
+    {hours,
+    minutes,
+    seconds,
+    payload,
+    title,
+    body}) async {
+  print('<======= scheduled notification triggered =======>');
+
+  DateTime scheduledNotificationDateTime = DateTime.now()
+      .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
+
+  AndroidNotificationDetails androidNotificationDetails =
+      AndroidNotificationDetails(
+          'scheduled_notification',
+          'Schedule notification',
+          'Schedules a notification for a time in the future.',
+          priority: Priority.High,
+          importance: Importance.Max,
+          ticker: 'scheduledNotification');
+  IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+
+  NotificationDetails notificationDetails =
+      NotificationDetails(androidNotificationDetails, iosNotificationDetails);
+
+  await flutterLocalNotificationsPlugin.schedule(localNotificationId.index,
+      title, body, scheduledNotificationDateTime, notificationDetails,
+      payload: payload);
 }
 
-//      id,
-//      "Prueba de vida",
-//      "Ingrese a la app para probar que está con su celular.",
-//      Time(hours, minutes, seconds),
-//      notificationDetails,
-//      payload: "gotoBiometrics");
+Future<void> onSelectNotification(String payload) {
+  if (payload.startsWith("doBiometrics")) {
+    locator<NavigationService>().navigateTo(
+        'alertpagebiometrics', getLocalNotificationIdFromPayload(payload));
+  }
+
+  return null;
+}

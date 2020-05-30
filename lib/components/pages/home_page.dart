@@ -32,17 +32,17 @@ class _HomePageState extends State<HomePage> {
       if (await hasCurrentUser()) {
         locator<NavigationService>().navigateTo('innerpage');
 
-        /// Between 9:00 and 12:00
-        generateDailyNotification(
-            0, 9 + Random().nextInt(12 - 9), 00, 00, 'doBiometrics-0');
+        // Between 9:00 and 12:00
+        generateDailyNotification(LocalNotificationIds.morningDaily,
+            9 + Random().nextInt(12 - 9), 00, 00);
 
-        /// Between 14:00 and 16:00
-        generateDailyNotification(
-            1, 14 + Random().nextInt(16 - 14), 00, 00, 'doBiometrics-1');
+        // Between 14:00 and 16:00
+        generateDailyNotification(LocalNotificationIds.middayDaily,
+            14 + Random().nextInt(16 - 14), 00, 00);
 
-        /// Between 18:00 and 20:00
-        generateDailyNotification(
-            2, 18 + Random().nextInt(20 - 18), 00, 00, 'doBiometrics-2');
+        // Between 18:00 and 20:00
+        generateDailyNotification(LocalNotificationIds.afternoonDaily,
+            18 + Random().nextInt(20 - 18), 00, 00);
 
         addHomeGeofence(user);
         await startGeofencing(150.0,
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               event.location.coords.latitude, event.location.coords.longitude);
           if (heartbeat.withinFence == false) {
             generateInstantNotification(
-                3,
+                LocalNotificationIds.outOfZoneInstant,
                 'Saliste de la zona',
                 'Una alarma ha sido enviada al centro de control.',
                 'alertOutOfZone');
@@ -67,8 +67,8 @@ class _HomePageState extends State<HomePage> {
     initializeLocalNotifications(_onDidReceiveLocalNotification,
         onSelectNotification: (String payload) {
       if (payload.startsWith("doBiometrics")) {
-        locator<NavigationService>()
-            .navigateTo('alertpagebiometrics', payload.split("-")[1]);
+        locator<NavigationService>().navigateTo(
+            'alertpagebiometrics', getLocalNotificationIdFromPayload(payload));
       }
       if (payload == 'alertOutOfZone') {
         locator<NavigationService>().navigateTo('alertpageoutofzone');
