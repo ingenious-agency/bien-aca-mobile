@@ -7,7 +7,7 @@ Future<bool> authenticateFingerprint(
     LocalNotificationIds notificationId) async {
   LocalAuthentication localAuth = LocalAuthentication();
 
-  reRandomDailyNotifications(notificationId);
+  reOrderDailyNotifications(notificationId);
 
   bool authenticated = false;
   try {
@@ -31,7 +31,7 @@ Future<bool> authenticateFingerprint(
 /// If [id] == `middayDaily` -> Re-random `LocalNotificationIds.afternoonDaily`
 ///
 /// If [id] == `afternoonDaily` -> Re-random `LocalNotificationIds.morningDaily`
-void reRandomDailyNotifications(notificationId) {
+void reOrderDailyNotifications(notificationId) {
   int hours;
   int minutes = 0 + Random().nextInt(30 - 0);
   switch (notificationId) {

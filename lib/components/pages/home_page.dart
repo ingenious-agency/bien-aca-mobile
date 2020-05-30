@@ -68,9 +68,7 @@ class _HomePageState extends State<HomePage> {
         onSelectNotification: (String payload) {
       if (payload.startsWith("doBiometrics")) {
         locator<NavigationService>().navigateTo(
-            'alertpagebiometrics',
-            LocalNotificationIds.values
-                .firstWhere((e) => e.toString() == payload.split("-")[1]));
+            'alertpagebiometrics', getLocalNotificationIdFromPayload(payload));
       }
       if (payload == 'alertOutOfZone') {
         locator<NavigationService>().navigateTo('alertpageoutofzone');

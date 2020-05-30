@@ -20,6 +20,10 @@ enum LocalNotificationIds {
   lostGpsInstant,
 }
 
+dynamic getLocalNotificationIdFromPayload(payload) =>
+    LocalNotificationIds.values
+        .firstWhere((e) => e.toString() == payload.split("-")[1]);
+
 void initializeLocalNotifications(onDidReceiveLocalNotification,
     {onSelectNotification = onSelectNotification}) async {
   initializationSettingsAndroid = AndroidInitializationSettings('icon');
@@ -114,9 +118,7 @@ Future<void> generateScheduledNotification(
 Future<void> onSelectNotification(String payload) {
   if (payload.startsWith("doBiometrics")) {
     locator<NavigationService>().navigateTo(
-        'alertpagebiometrics',
-        LocalNotificationIds.values
-            .firstWhere((e) => e.toString() == payload.split("-")[1]));
+        'alertpagebiometrics', getLocalNotificationIdFromPayload(payload));
   }
 
   return null;
